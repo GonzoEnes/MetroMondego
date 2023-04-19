@@ -10,15 +10,17 @@
 
 #define MAX 100
 
-typedef struct paragens paragem, *pparagem;
+typedef struct paragens paragem, *pParagem;
 
 struct paragens {
     char nome[MAX];
     char codigo[5];
 };
 
-pparagem addParagem(pparagem p, int *tam);
-pparagem removeParagem(pparagem p, int *tam);
-void listaParagem(pparagem p, int tam);
+pParagem addParagem(pParagem p, int *tam);
+pParagem removeParagem(pParagem p, int *tam);
+void listaParagem(pParagem p, int tam);
+int checkIfExistsByCode(pParagem p, char* codigo, int tam);
+int checkIfExistsByName(pParagem p, char* nome, int tam);
 
 #endif //METROMONDEGO_PARAGENS_H

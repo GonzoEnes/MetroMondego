@@ -12,14 +12,13 @@ struct linhas {
     int nParagens;
     int nLinhas;
     char nomeLinha[MAX];
-    pparagem paragens;
+    pParagem paragens;
     pLinha prox;
 };
 
 void freeLinhas(pLinha linhas);
-pLinha criaLinha(pLinha head, pparagem p, int total);
-pLinha addParagemToList(pLinha head, pparagem p, int quantas);
+pLinha criaLinha(pLinha head, pParagem p, int total);
 int isListEmpty(pLinha linhas);
-void listaInfoList(pLinha head);
+void listaInfoLinha(pLinha head);
 
 #endif //METROMONDEGO_LINHAS_H

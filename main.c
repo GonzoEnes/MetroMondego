@@ -4,7 +4,7 @@
 #include "linhas.h"
 
 int main() {
-    pparagem p = NULL;
+    pParagem p = NULL;
 
     pLinha linhas = NULL;
 
@@ -14,7 +14,7 @@ int main() {
 
     srand(time(NULL));
 
-    printf("\nQuantas paragens deseja adicionar?");
+    printf("\nQuantas paragens deseja adicionar? ");
 
     scanf(" %d", &n_paragens);
 
@@ -36,11 +36,13 @@ int main() {
                     printf("\nInsira o nome da paragem: ");
                     scanf(" %s", nome);
                     p = removeParagem(p, &tam);
-                    printf("\nLista atualizada: ");
+                    printf("\nLista atualizada: \n");
                     listaParagem(p, tam);
                     break;
                 case 3:
                     listaParagem(p, tam);
+                    linhas = criaLinha(linhas, p, tam);
+                    listaInfoLinha(linhas);
                     break;
                 case 4:
                     printf("A terminar execucao...\n");

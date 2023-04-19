@@ -5,11 +5,11 @@
 #include "paragens.h"
 #include "utils.h"
 
-pparagem addParagem(pparagem p, int *tam){
+pParagem addParagem(pParagem p, int *tam){
 
     paragem novo;
 
-    pparagem aux = realloc(p, sizeof(struct paragens) * (*tam + 1));
+    pParagem aux = realloc(p, sizeof(struct paragens) * (*tam + 1));
 
     if (aux == NULL){
         printf("\nErro na alocacao de memoria das paragens.\n");
@@ -19,14 +19,13 @@ pparagem addParagem(pparagem p, int *tam){
     printf("\nIntroduza o nome da paragem: ");
     scanf(" %s", novo.nome);
 
-    for (int i = 0; i < *tam; i++){
-        if(strcmp(aux[i].nome, novo.nome) == 0){
-            printf("\nParagem [%s] ja existe no sistema.\n", novo.nome);
-            return aux;
-        }
-    }
+    int index = checkIfExistsByName(p, novo.nome, *tam);
 
-    //strcpy(novo.codigo,geradorCodigo());
+    if (index != -1) {
+        printf("\n[ERRO] Nao consigo adicionar ao sistema uma paragem que ja existe! [%s]", novo.nome);
+        free(aux);
+        return p;
+    }
 
     strcpy(novo.codigo, geradorCodigo());
 
@@ -39,33 +38,34 @@ pparagem addParagem(pparagem p, int *tam){
     return aux;
 }
 
-pparagem removeParagem(pparagem p, int *tam){
+pParagem removeParagem(pParagem p, int *tam){
 
-    pparagem aux = NULL;
+    pParagem aux = NULL;
 
     paragem retorna;
 
-    int index = 0;
+    int index;
 
-    char nome[MAX];
+    char codigo[5];
 
     printf("\nInsira o codigo da paragem a remover: ");
 
-    scanf(" %s", nome);
+    scanf(" %s", codigo);
 
-    for (int i = 0; i < *tam; i++){
-        if (strcmp(p[i].nome, nome) == 0){
-            printf("\nA remover da lista... [%s]", p[i].nome);
-            index = i;
-            break;
-        }
+    index = checkIfExistsByCode(p, codigo, *tam);
+
+    if (index != -1) {
+
+        retorna = p[index]; // guardar caso a realloc corra mal
+
+        p[index] = p[(*tam)-1];
+
+        (*tam)--;
     }
-
-    retorna = p[index]; // guardar caso a realloc corra mal
-
-    p[index] = p[(*tam)-1];
-
-    (*tam)--;
+    else {
+        printf("\n[ERRO] Nao consigo remover uma paragem que nao existe!");
+        return p;
+    }
 
     aux = realloc(p, (*tam) * sizeof(paragem));
 
@@ -81,7 +81,30 @@ pparagem removeParagem(pparagem p, int *tam){
     return aux;
 }
 
-void listaParagem(pparagem p, int tam){
+int checkIfExistsByCode(pParagem p, char* codigo, int tam){
+    for (int i = 0; i < tam; i++){
+        if(strcmp(p[i].codigo, codigo) == 0){
+            return i; //retorna o indice onde esta a paragem no array
+        }
+    }
+    return -1;
+}
+
+int checkIfExistsByName(pParagem p, char* nome, int tam){
+    for (int i = 0; i < tam; i++){
+        if(strcmp(p[i].nome, nome) == 0){
+            return i; //retorna o indice onde esta a paragem no array
+        }
+    }
+    return -1;
+}
+
+void listaParagem(pParagem p, int tam){
+    if(tam == 0){
+        printf("\n[WARNING] Nada a listar. Nao existem paragens no sistema.\n");
+        return;
+    }
+
     printf("\n------------ A LISTAR PARAGENS ------------\n");
 
     for (int i = 0; i < tam; i++){
@@ -92,7 +115,7 @@ void listaParagem(pparagem p, int tam){
         printf("Codigo: %s\n", p[i].codigo);
     }
 
-    printf("\n------------ FIM ------------\n");
+    printf("\n------------  FIM DA LISTAGEM  ------------\n");
 }
 
 
