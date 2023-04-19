@@ -17,11 +17,13 @@ struct linhas {
 };
 
 void freeLinhas(pLinha linhas);
-pLinha criaLinha(pLinha head, pParagem p, int total);
-pLinha updateLinha(pLinha head, pParagem p, int total);
+pLinha criaLinha(pLinha head, pParagem p, int totalParagens);
+pLinha removeLinha(pLinha head);
+pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha);
+pLinha updateLinha(pLinha head, int quantRemover, char* nomeLinha);
 int isListEmpty(pLinha linhas);
 void listaInfoLinha(pLinha head, pParagem p, int totalLinhas);
-int contemParagem(pLinha head, pParagem p, char* nomeParagem);
+pLinha contemParagem(pLinha head, char* nomeParagem); // verifica se contem uma determinada paragem passada por parametro na lista de linhas
 int doesLinhaExist(pLinha head, char* nomeLinha);
 
 #endif //METROMONDEGO_LINHAS_H

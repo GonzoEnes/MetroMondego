@@ -23,17 +23,17 @@ void freeLinhas(pLinha linhas){
     }
 }
 
-int contemParagem(pLinha head, pParagem p, char* nomeParagem){
-    while(head != NULL){
-        for (int i = 0; i < head->nParagens; i++){
-            if(strcmp(head->paragens[i].nome, nomeParagem) == 0){
-                return 1;
+pLinha contemParagem(pLinha head, char* nomeParagem){
+    pLinha aux = head;
+    while(aux != NULL){
+        for (int i = 0; i < aux->nParagens; i++){
+            if(strcmp(aux->paragens[i].nome, nomeParagem) == 0){
+                return head;
             }
         }
-
-        head = head->prox;
+        aux = aux->prox;
     }
-    return 0;
+    return NULL;
 }
 
 int doesLinhaExist(pLinha head, char* nomeLinha){
@@ -63,7 +63,7 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
 
     printf("\nQual o nome da linha? \n");
 
-    scanf_s(" %s", novo->nomeLinha, MAX);
+    scanf(" %s", novo->nomeLinha);
 
     novo->prox = NULL;
 
@@ -99,7 +99,7 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
 
         for (int i = 0; i < novo->nParagens; i++){
             printf("\nInsira o nome da %da paragem a adicionar: ", i+1);
-            scanf_s(" %s", nomeParagem, MAX);
+            scanf(" %s", nomeParagem);
 
             if(strcmp(novo->paragens[i].nome, nomeParagem) == 0){ // verificar se essa paragem já foi adicionada aquando a criação DAR DEBUG
                 printf("\n[ERRO] Esta paragem ja se encontra na linha!\n");
@@ -147,9 +147,79 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
     }
 }
 
-pLinha updateLinha(pLinha head, pParagem p, int total){
-    printf("\nQue operacao deseja realizar? Inserir uma das tres opcoes: \n");
-    printf("'remove' 'adicionar' ''");
+pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha){
+    pLinha aux = head;
+
+    if (isListEmpty(head) == 1){
+        printf("\n[ERRO] Lista vazia.\n");
+        return head;
+    }
+
+    while(aux != NULL){ // enquanto tiver linhas
+        if(strcmp(aux->nomeLinha, nomeLinha) == 0){ // encontra a linha que o user input
+            while(aux->nParagens >= quant && quant > 0){ // enquanto a quantidade que o user inseriu for menor que o numero total de paragens e maior que 0
+                aux->paragens = removeParagem(aux->paragens, &aux->nParagens); // atualiza a lista e remove as paragens indicadas pelo user.
+                quant--; // reduz o cont
+            }
+        }
+        aux = aux->prox;
+    }
+
+    return head;
+}
+
+pLinha removeLinha(pLinha head){
+    pLinha aux = head, anterior;
+    char nomeLinha[MAX];
+
+    if(isListEmpty(head) == 1){
+        printf("\n[ERRO] Nada a remover. Nao existem linhas no sistema.\n");
+        return head;
+    }
+
+    printf("\nInsira o nome da linha que deseja remover: ");
+
+    scanf(" %s", nomeLinha);
+
+    if (aux != NULL && strcmp(aux->nomeLinha, nomeLinha) == 0){ // se o nó a remover for a raiz então
+        head = aux->prox; // a raiz é o proximo no (NULL)
+        free(aux); // libertamos o espaço da "raiz"
+        return head;
+    }
+
+    while(aux != NULL && strcmp(aux->nomeLinha, nomeLinha) != 0){ // vai tentando encontrar o nome a remover na lista inteira...
+        anterior = aux;
+        aux = aux->prox;
+    }
+
+    if (aux == NULL){ // se nao encontrar sai
+        printf("\n[ERRO] Linha nao existe no sistema. Nao consegui remover.\n");
+        return head;
+    }
+
+    // se encontrou, entao:
+    anterior->prox = aux->prox; // arrancamos
+    free(aux);
+    return head; // devolve a lista atualizada
+}
+
+pLinha updateLinha(pLinha head, int quantRemover, char* nomeLinha){
+    char userInput[MAX];
+    int quant = 0;
+
+    printf("\nQue operacao deseja realizar? Inserir uma das duas opcoes: 'remover' ou 'adicionar'\n");
+
+    do{
+        scanf(" %s", userInput);
+
+        if (strcmp(userInput, "remover") != 0 && strcmp(userInput, "atualizar") != 0 && strcmp(userInput, "adicionar") != 0){
+            printf("\n[ERRO] Formato invalido. Insira 'remover' ou 'adicionar'");
+        }
+    }while(strcmp(userInput, "remover") != 0 && strcmp(userInput, "adicionar") != 0);
+
+    if (strcmp(userInput, "remover") == 0){
+        // fazer
+    }
 
     return head;
 }
@@ -170,7 +240,7 @@ void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melho
     printf("Escreva [paragem] ou [todas] para confirmar a selecao\n");
 
     do {
-        scanf_s(" %s", userChoice, MAX);
+        scanf(" %s", userChoice);
 
         if (strcmp(userChoice, "paragem") != 0 && strcmp(userChoice, "todas") != 0){
             printf("\nInsira [paragem] ou [todas]: ");
@@ -201,7 +271,7 @@ void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melho
     else if (strcmp(userChoice, "paragem") == 0){
         do{
             printf("\nInsira o nome da paragem ('fim' para parar a listagem): ");
-            scanf_s(" %s", nomeParagem, MAX);
+            scanf(" %s", nomeParagem);
 
             printf("\nINSERIU: %s\n", nomeParagem);
 

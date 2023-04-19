@@ -8,13 +8,15 @@ int main() {
 
     pLinha linhas = NULL; // lista ligada pointer
 
+    char nomeLinha[MAX];
+
     int tam = 0, n_paragens = 0, totalLinhas = 0;
 
     srand(time(NULL));
 
     printf("\nQuantas paragens deseja adicionar? ");
 
-    scanf_s(" %d", &n_paragens);
+    scanf(" %d", &n_paragens);
 
     printf("Paragens alocadas: %d", n_paragens);
 
@@ -27,6 +29,18 @@ int main() {
     linhas = criaLinha(linhas, p, tam);
 
     listaParagemSys(p, tam);
+
+    listaInfoLinha(linhas, p, tam);
+
+    printf("\nQue linha deseja remover as paragens?");
+    scanf(" %s", nomeLinha);
+
+    int quantas = 0;
+
+    printf("\nQuantas paragens deseja remover?\n");
+    scanf(" %d", &quantas);
+
+    linhas = removeParagensFromLinha(linhas, quantas, nomeLinha);
 
     listaInfoLinha(linhas, p, tam);
 
