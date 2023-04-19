@@ -18,6 +18,7 @@ struct linhas {
 
 void freeLinhas(pLinha linhas);
 pLinha criaLinha(pLinha head, pParagem p, int total);
+pLinha updateLinha(pLinha head, pParagem p, int total);
 int isListEmpty(pLinha linhas);
 void listaInfoLinha(pLinha head, pParagem p, int totalLinhas);
 int contemParagem(pLinha head, pParagem p, char* nomeParagem);

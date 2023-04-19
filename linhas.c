@@ -147,6 +147,13 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
     }
 }
 
+pLinha updateLinha(pLinha head, pParagem p, int total){
+    printf("\nQue operacao deseja realizar? Inserir uma das tres opcoes: \n");
+    printf("'remove' 'adicionar' ''");
+
+    return head;
+}
+
 void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melhor esta função para não ficar tão grande quando tiver tempo
     pLinha aux;
     char userChoice[MAX], nomeParagem[MAX];
