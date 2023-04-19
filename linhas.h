@@ -19,6 +19,8 @@ struct linhas {
 void freeLinhas(pLinha linhas);
 pLinha criaLinha(pLinha head, pParagem p, int total);
 int isListEmpty(pLinha linhas);
-void listaInfoLinha(pLinha head);
+void listaInfoLinha(pLinha head, pParagem p, int totalLinhas);
+int contemParagem(pLinha head, pParagem p, char* nomeParagem);
+int doesLinhaExist(pLinha head, char* nomeLinha);
 
 #endif //METROMONDEGO_LINHAS_H

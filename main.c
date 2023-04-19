@@ -4,23 +4,33 @@
 #include "linhas.h"
 
 int main() {
-    pParagem p = NULL;
+    pParagem p = NULL; // array dinamico pointer
 
-    pLinha linhas = NULL;
+    pLinha linhas = NULL; // lista ligada pointer
 
-    int tam = 0, choice, n_paragens = 0;
-
-    char nome[MAX];
+    int tam = 0, n_paragens = 0, totalLinhas = 0;
 
     srand(time(NULL));
 
     printf("\nQuantas paragens deseja adicionar? ");
 
-    scanf(" %d", &n_paragens);
+    scanf_s(" %d", &n_paragens);
 
     printf("Paragens alocadas: %d", n_paragens);
 
-    while(1){
+    for (int i = 0; i < n_paragens; i++){
+        p = addParagem(p, &tam);
+    }
+
+    listaParagemSys(p, tam);
+
+    linhas = criaLinha(linhas, p, tam);
+
+    listaParagemSys(p, tam);
+
+    listaInfoLinha(linhas, p, tam);
+
+    /*do{
         do{
             choice = menu();
 
@@ -41,18 +51,25 @@ int main() {
                     break;
                 case 3:
                     listaParagem(p, tam);
-                    linhas = criaLinha(linhas, p, tam);
-                    listaInfoLinha(linhas);
+                    printf("\nQuantas linhas deseja criar?");
+                    scanf_s("%d", &totalLinhas);
+                    for (int i = 0; i < totalLinhas; i++){
+                        linhas = criaLinha(linhas, p, tam);
+                    }
+                    //printf("\naqui\n");
+                    //listaInfoLinha(linhas, p, totalLinhas);
                     break;
                 case 4:
                     printf("A terminar execucao...\n");
                     exit(EXIT_SUCCESS);
                 default:
+                    printf("\nInsira um input valido!\n");
                     break;
             }
         }while(choice < 1 || choice > 4);
-    }
+    }while(1);
 
     free(p);
-    return 0;
+    freeLinhas(linhas);
+    return 0;*/
 }

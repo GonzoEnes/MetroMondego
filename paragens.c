@@ -29,6 +29,8 @@ pParagem addParagem(pParagem p, int *tam){
 
     strcpy(novo.codigo, geradorCodigo());
 
+    novo.nLinhas = 0; // inicialmente não pertence a nenhuma linha
+
     printf("\nA atribuir o codigo... [%s]", novo.codigo);
 
     aux[(*tam)] = novo;
@@ -81,7 +83,7 @@ pParagem removeParagem(pParagem p, int *tam){
     return aux;
 }
 
-int checkIfExistsByCode(pParagem p, char* codigo, int tam){
+int checkIfExistsByCode(pParagem p, char codigo[5], int tam){
     for (int i = 0; i < tam; i++){
         if(strcmp(p[i].codigo, codigo) == 0){
             return i; //retorna o indice onde esta a paragem no array
@@ -90,7 +92,7 @@ int checkIfExistsByCode(pParagem p, char* codigo, int tam){
     return -1;
 }
 
-int checkIfExistsByName(pParagem p, char* nome, int tam){
+int checkIfExistsByName(pParagem p, char nome[MAX], int tam){
     for (int i = 0; i < tam; i++){
         if(strcmp(p[i].nome, nome) == 0){
             return i; //retorna o indice onde esta a paragem no array
@@ -99,7 +101,33 @@ int checkIfExistsByName(pParagem p, char* nome, int tam){
     return -1;
 }
 
-void listaParagem(pParagem p, int tam){
+/*void listaParagemByLinha(pParagem p, int tam, char* nomeLinha){
+    if (tam == 0){
+        printf("[WARNING] Nada a listar.");
+        return;
+    }
+
+    printf("\n------------ A LISTAR PARAGENS DE LINHA [%s] ------------\n", nomeLinha);
+
+    for (int i = 0; i < tam; i++){
+
+        if(strcmp() == 0){
+            printf("\nParagem %d: \n", i+1);
+
+            printf("Nome: %s\n", p[i].nome);
+
+            printf("Codigo: %s\n", p[i].codigo);
+
+            printf("\nPertence a: %d linhas\n", p[i].nLinhas);
+        }
+
+    }
+
+    printf("\n------------  FIM DA LISTAGEM  ------------\n");
+
+}*/
+
+void listaParagemSys(pParagem p, int tam){
     if(tam == 0){
         printf("\n[WARNING] Nada a listar. Nao existem paragens no sistema.\n");
         return;
@@ -113,6 +141,8 @@ void listaParagem(pParagem p, int tam){
         printf("Nome: %s\n", p[i].nome);
 
         printf("Codigo: %s\n", p[i].codigo);
+
+        printf("\nPertence a: %d linhas\n", p[i].nLinhas);
     }
 
     printf("\n------------  FIM DA LISTAGEM  ------------\n");
