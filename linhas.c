@@ -168,6 +168,24 @@ pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha){
     return head;
 }
 
+pLinha addParagensToLinha(pLinha head, int quant, char* nomeLinha){
+    pLinha aux = head;
+
+    if (isListEmpty(head) == 1){
+        printf("\n[ERRO] Nao existem linhas no sistema atualmente. Nada a adicionar.\n");
+        return head;
+    }
+
+    while(aux != NULL){
+        if (strcmp(aux->nomeLinha, nomeLinha) == 0){
+            // TODO
+        }
+        aux = aux->prox;
+    }
+
+    return head;
+}
+
 pLinha removeLinha(pLinha head){
     pLinha aux = head, anterior;
     char nomeLinha[MAX];
@@ -203,11 +221,8 @@ pLinha removeLinha(pLinha head){
     return head; // devolve a lista atualizada
 }
 
-pLinha updateLinha(pLinha head, int quantRemover, char* nomeLinha){
-    char userInput[MAX];
-    int quant = 0;
-
-    printf("\nQue operacao deseja realizar? Inserir uma das duas opcoes: 'remover' ou 'adicionar'\n");
+    /* METER ESTE CODIGO NA MAIN DEPOIS QUANDO FIZER A UI
+     * printf("\nQue operacao deseja realizar? Inserir uma das duas opcoes: 'remover' ou 'adicionar'\n");
 
     do{
         scanf(" %s", userInput);
@@ -215,14 +230,7 @@ pLinha updateLinha(pLinha head, int quantRemover, char* nomeLinha){
         if (strcmp(userInput, "remover") != 0 && strcmp(userInput, "atualizar") != 0 && strcmp(userInput, "adicionar") != 0){
             printf("\n[ERRO] Formato invalido. Insira 'remover' ou 'adicionar'");
         }
-    }while(strcmp(userInput, "remover") != 0 && strcmp(userInput, "adicionar") != 0);
-
-    if (strcmp(userInput, "remover") == 0){
-        // fazer
-    }
-
-    return head;
-}
+    }while(strcmp(userInput, "remover") != 0 && strcmp(userInput, "adicionar") != 0);*/
 
 void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melhor esta função para não ficar tão grande quando tiver tempo
     pLinha aux;

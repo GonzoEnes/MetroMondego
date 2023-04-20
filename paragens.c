@@ -83,7 +83,7 @@ pParagem removeParagem(pParagem p, int *tam){
     return aux;
 }
 
-int checkIfExistsByCode(pParagem p, char codigo[5], int tam){
+int checkIfExistsByCode(pParagem p, char *codigo, int tam){
     for (int i = 0; i < tam; i++){
         if(strcmp(p[i].codigo, codigo) == 0){
             return i; //retorna o indice onde esta a paragem no array
@@ -92,7 +92,7 @@ int checkIfExistsByCode(pParagem p, char codigo[5], int tam){
     return -1;
 }
 
-int checkIfExistsByName(pParagem p, char nome[MAX], int tam){
+int checkIfExistsByName(pParagem p, char* nome, int tam){
     for (int i = 0; i < tam; i++){
         if(strcmp(p[i].nome, nome) == 0){
             return i; //retorna o indice onde esta a paragem no array

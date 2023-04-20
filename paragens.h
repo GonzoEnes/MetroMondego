@@ -18,11 +18,11 @@ struct paragens {
     int nLinhas; // a quantas linhas pertence
 };
 
-pParagem addParagem(pParagem p, int *tam);
-pParagem removeParagem(pParagem p, int *tam);
+pParagem addParagem(pParagem p, int *tam); // adds paragem to SYSTEM
+pParagem removeParagem(pParagem p, int *tam); // remove paragem FROM SYSTEM
 void listaParagemSys(pParagem p, int tam); // lista todas as paragens do SISTEMA
 //void listaParagemByLinha(pParagem p, int tam, char* nomeLinha);
-int checkIfExistsByCode(pParagem p, char codigo[5], int tam);
-int checkIfExistsByName(pParagem p, char nome[MAX], int tam); // verifica se paragem existe no SISTEMA
+int checkIfExistsByCode(pParagem p, char *codigo, int tam); // verifica se a paragem existe no sistema pelo codigo dado
+int checkIfExistsByName(pParagem p, char *nome, int tam); // verifica se paragem existe no SISTEMA
 
 #endif //METROMONDEGO_PARAGENS_H

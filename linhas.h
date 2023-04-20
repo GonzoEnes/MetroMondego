@@ -19,8 +19,8 @@ struct linhas {
 void freeLinhas(pLinha linhas);
 pLinha criaLinha(pLinha head, pParagem p, int totalParagens);
 pLinha removeLinha(pLinha head);
-pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha);
-pLinha updateLinha(pLinha head, int quantRemover, char* nomeLinha);
+pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha); // remove X paragens de linha Y
+pLinha addParagensToLinha(pLinha head, int quant, char* nomeLinha); // se possíve, mudar tudo para algo assim, fica mais giro // adiciona X paragens a linha Y
 int isListEmpty(pLinha linhas);
 void listaInfoLinha(pLinha head, pParagem p, int totalLinhas);
 pLinha contemParagem(pLinha head, char* nomeParagem); // verifica se contem uma determinada paragem passada por parametro na lista de linhas
