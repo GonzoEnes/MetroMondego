@@ -10,6 +10,8 @@ int main() {
 
     char nomeLinha[MAX];
 
+    char pontoPartida[MAX], pontoChegada[MAX];
+
     int tam = 0, n_paragens = 0, totalLinhas = 0;
 
     srand(time(NULL));
@@ -32,17 +34,35 @@ int main() {
 
     listaInfoLinha(linhas, p, tam);
 
-    printf("\nQue linha deseja remover as paragens?");
+    /*printf("\nQue linha deseja remover as paragens?");
     scanf(" %s", nomeLinha);
 
     int quantas = 0;
 
     printf("\nQuantas paragens deseja remover?\n");
-    scanf(" %d", &quantas);
+    scanf(" %d", &quantas);*/
 
-    linhas = removeParagensFromLinha(linhas, quantas, nomeLinha);
+    // linhas = removeParagensFromLinha(linhas, quantas, nomeLinha);
 
-    listaInfoLinha(linhas, p, tam);
+    // listaInfoLinha(linhas, p, tam);
+
+    printf("\nInsira o ponto de partida e ponto de chegada para o seu percurso: ");
+
+    do {
+
+        printf("\nPonto partida: ");
+        scanf(" %s", pontoPartida);
+
+        printf("\nPonto chegada: ");
+        scanf(" %s", pontoChegada);
+
+        calculaParagensSemOverflow(linhas, pontoPartida, pontoChegada);
+
+        if(strcmp(pontoPartida, "fim") == 0 || strcmp(pontoChegada, "fim") == 0){
+            printf("\nA terminar...\n");
+        }
+
+    }while(strcmp(pontoPartida, "fim") != 0 || strcmp(pontoChegada, "fim") != 0);
 
     /*do{
         do{

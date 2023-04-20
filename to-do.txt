@@ -1,0 +1,40 @@
+PARAGENS:
+
+Registar paragens com gerador de codigo 4 carateres (CRIAR) - SIM
+Criar paragem com o ficheiro de texto e armazenar detalhes - NAO
+Eliminar paragens - SIM
+Ver detalhes sobre as paragens que existem no sistema - SIM
+Verificar se há duas paragens com codigo e/ou nome igual - SIM
+
+---------------------------------------------------------------------------------------
+
+LINHAS:
+
+Criação de lista ligada - SIM
+Adicionar linhas ao sistema com user input - SIM
+Adicionar paragens a uma certa linha - SIM
+Adicionar linhas ao sistema com ficheiro de texto - NAO
+Verificação se existem 2 linhas com o mesmo nome - SIM
+Atualizar linhas (apagar ou adicionar paragens) com quantidade = userInput - SIM
+Visualizar todos os detalhes da linha (paragens, numero de paragens e assim) - SIM
+Calcular percursos com destino e partida indicados pelo user - NAO
+      Com 1 mudança de linha -   NAO
+      Com apenas a mesma linha - NAO
+
+---------------------------------------------------------------------------------------
+
+UI:
+
+Criação de uma UI com menu e assim - SIM/NAO
+
+---------------------------------------------------------------------------------------
+
+O QUE FALTA:
+
+Criar paragem com o ficheiro de texto e armazenar detalhes - NAO
+Adicionar linhas ao sistema com ficheiro de texto - NAO
+Calcular percursos com destino e partida indicados pelo user - NAO
+      Com 1 mudança de linha -   NAO
+      Com apenas a mesma linha - NAO
+Criação de uma UI com menu e assim - SIM/NAO
+

@@ -25,5 +25,6 @@ int isListEmpty(pLinha linhas);
 void listaInfoLinha(pLinha head, pParagem p, int totalLinhas);
 pLinha contemParagem(pLinha head, char* nomeParagem); // verifica se contem uma determinada paragem passada por parametro na lista de linhas
 int doesLinhaExist(pLinha head, char* nomeLinha);
+void calculaParagensSemOverflow(pLinha head, char* nomePartida, char* nomeDestino);
 
 #endif //METROMONDEGO_LINHAS_H
