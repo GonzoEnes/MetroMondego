@@ -32,6 +32,10 @@ int main() {
 
     listaParagemSys(p, tam);
 
+    if(linhas == NULL){
+        return 0;
+    }
+
     listaInfoLinha(linhas, p, tam);
 
     /*printf("\nQue linha deseja remover as paragens?");
@@ -50,11 +54,14 @@ int main() {
 
     do {
 
-        printf("\nPonto partida: ");
+        printf("\nPonto partida: ('fim' para acabar)");
         scanf(" %s", pontoPartida);
+        printf("\nInseriu: %s", pontoPartida);
 
-        printf("\nPonto chegada: ");
+
+        printf("\nPonto chegada: ('fim' para acabar)");
         scanf(" %s", pontoChegada);
+        printf("\nInseriu: %s", pontoChegada);
 
         calculaParagensSemOverflow(linhas, pontoPartida, pontoChegada);
 

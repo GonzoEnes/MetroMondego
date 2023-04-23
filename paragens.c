@@ -147,5 +147,3 @@ void listaParagemSys(pParagem p, int tam){
 
     printf("\n------------  FIM DA LISTAGEM  ------------\n");
 }
-
-
