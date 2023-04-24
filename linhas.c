@@ -91,6 +91,8 @@ void calculaParagensSemOverflow(pLinha head, char* nomePartida, char* nomeDestin
                             break;
                         }
                         else if(indexStartPoint > indexEndPoint){ // se o inicio estiver depois do fim
+
+                            //fazer a verificacao que se o indexStartPoint e o ultimo elemento e o indexEndPoint esta antes (obvio) printa o array do inicio ao fim
                             printf("\n------------------------------------------------------------------------------\n");
                             printf("\n[NOTIFICACAO] Este percurso pode ser feito pela linha: [%s]\n", aux->nomeLinha);
                             printf("\nA listar todo o percurso que fara entre [%s] -> [%s]\n", nomePartida, nomeDestino);
@@ -102,9 +104,9 @@ void calculaParagensSemOverflow(pLinha head, char* nomePartida, char* nomeDestin
                             }
 
                             for(int l = indexEndPoint; l != indexStartPoint; l = (l + 1) % aux->nParagens){
-                                printf("-> [%s] ",aux->paragens[l].nome);
+                                printf("[%s]",aux->paragens[l].nome);
                             }
-                            printf("-> [%s]\n", nomeDestino);
+                            //printf("-> [%s]\n", nomeDestino);
                             printf("\n------------------------------------------------------------------------------\n");
                             break;
                         }
