@@ -71,6 +71,16 @@ int main() {
 
     }while(strcmp(pontoPartida, "fim") != 0 || strcmp(pontoChegada, "fim") != 0);
 
+    printf("\nInsira o nome da linha que quer retirar paragens: ");
+    scanf("%s", nomeLinha);
+
+    printf("\nInsira quantas paragens quer remover ");
+    scanf(" %d", &n_paragens);
+
+    linhas = removeParagensFromLinha(linhas, n_paragens, nomeLinha);
+
+    listaInfoLinha(linhas, p, totalLinhas);
+
     /*do{
         do{
             choice = menu();
