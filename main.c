@@ -65,11 +65,11 @@ int main() {
 
         calculaParagensSemOverflow(linhas, pontoPartida, pontoChegada);
 
-        if(strcmp(pontoPartida, "fim") == 0 || strcmp(pontoChegada, "fim") == 0){
+        if(strcmp(pontoPartida, "fim") == 0 && strcmp(pontoChegada, "fim") == 0){
             printf("\nA terminar...\n");
         }
 
-    }while(strcmp(pontoPartida, "fim") != 0 || strcmp(pontoChegada, "fim") != 0);
+    }while(strcmp(pontoPartida, "fim") != 0 && strcmp(pontoChegada, "fim") != 0);
 
     printf("\nInsira o nome da linha que quer retirar paragens: ");
     scanf("%s", nomeLinha);
@@ -80,6 +80,10 @@ int main() {
     linhas = removeParagensFromLinha(linhas, n_paragens, nomeLinha);
 
     listaInfoLinha(linhas, p, totalLinhas);
+
+    linhas = removeLinha(linhas);
+
+    freeLinhas(linhas);
 
     /*do{
         do{
