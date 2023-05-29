@@ -23,8 +23,13 @@ int main() {
 
     srand(time(NULL));
 
-    linhas = rebuildLinhaFromFile("save.bin");
+    linhas = rebuildLinhaFromFile("saveLinhas.bin");
 
+    p = readParagensFromFile("saveParagens.bin", &tam);
+
+    if (p == NULL) {
+        printf("\nFicheiro esta vazio. Nao acrescentei novas paragens.\n");
+    }
     if (linhas == NULL) {
         printf("\nFicheiro estava vazio.\nNao acrescentei novas linhas.\n");
     }
@@ -112,13 +117,16 @@ int main() {
 
     freeLinhas(linhas);*/
 
-    do{
         do{
             choice = menu();
 
             switch(choice){
                 case 1:
-                    p = addParagem(p, &tam);
+                    printf("\nQuantas paragens quer adicionar?\n");
+                    scanf(" %d", &n_paragens);
+                    for (int i = 0; i < n_paragens; i++) {
+                        p = addParagem(p, &tam);
+                    }
                     printf("\nLista atualizada, execute o comando de listar informaçao das paragens para ve-la!\n");
                     break;
                 case 2:
@@ -173,7 +181,7 @@ int main() {
                     if (choiceOfUpdate == 1){
                         printf("\nQuantas paragens deseja remover da linha [%s]? ", updater);
                         scanf(" %d", &quantParagens);
-                        //linhas = removeParagensFromLinha(linhas, quantParagens, updater);
+                        linhas = removeParagemFromLinha(linhas, quantParagens, updater);
                     }
                     else if (choiceOfUpdate == 2) {
                         printf("\nQuantas paragens deseja adicionar a linha [%s]? ", updater);
@@ -188,18 +196,20 @@ int main() {
                 case 9:
                     printf("A terminar execucao...\n");
                     printf("A guardar no ficheiro todas as estruturas antes de terminar...\n");
-                    saveInfo(linhas, "save.bin");
-                    exit(EXIT_SUCCESS);
+                    saveInfoLinha(linhas, "saveLinhas.bin");
+                    saveInfoParagens("saveParagens.bin", p, tam);
+                    break;
                 default:
                     printf("\nInsira um input valido!\n");
                     break;
             }
-        }while(choice < 1 || choice > 4);
-    }while(1);
+        }while(choice != 9);
 
     free(p);
 
     freeLinhas(linhas);
+
+    printf("\nFIM PROGRAMA METRO MONDEGO\n");
 
     return 0;
 }

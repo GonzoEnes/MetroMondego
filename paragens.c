@@ -9,13 +9,6 @@ pParagem addParagem(pParagem p, int *tam){
 
     paragem novo;
 
-    pParagem aux = realloc(p, sizeof(struct paragens) * (*tam + 1));
-
-    if (aux == NULL){
-        printf("\nErro na alocacao de memoria das paragens.\n");
-        return p;
-    }
-
     printf("\nIntroduza o nome da paragem: ");
     scanf(" %s", novo.nome);
 
@@ -23,7 +16,13 @@ pParagem addParagem(pParagem p, int *tam){
 
     if (index != -1) {
         printf("\n[ERRO] Nao consigo adicionar uma paragem que ja existe! [%s]", novo.nome);
-        free(aux);
+        return p;
+    }
+
+    pParagem aux = realloc(p, sizeof(struct paragens) * (*tam + 1));
+
+    if (aux == NULL){
+        printf("\nErro na alocacao de memoria das paragens.\n");
         return p;
     }
 
@@ -39,6 +38,7 @@ pParagem addParagem(pParagem p, int *tam){
 
     return aux;
 }
+
 
 pParagem removeParagem(pParagem p, char* codigo, int *tam){
 

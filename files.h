@@ -9,6 +9,8 @@
 #include "linhas.h"
 
 int findFileSize(char *fileName);
-void saveInfo(pLinha head, char* fileName);
-
+int getNumOfStructsInFile(char *fileName);
+void saveInfoLinha(pLinha head, char* fileName); // guarda dentro do ficheiro bin toda a info de linhas + paragens do sistema
+pParagem readParagensFromFile(char* fileName, int *total);
+void saveInfoParagens(char* fileName, pParagem p, int total);
 #endif //METROMONDEGO_FILES_H

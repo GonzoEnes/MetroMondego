@@ -25,14 +25,14 @@ Calcular percursos com destino e partida indicados pelo user - NAO
 
 UI:
 
-Criação de uma UI com menu e assim - SIM/NAO
+Criação de uma UI com menu e assim - SIM
 
 ---------------------------------------------------------------------------------------
 
 O QUE FALTA:
 
 Criar paragem com o ficheiro de texto e armazenar detalhes - NAO
-Adicionar linhas ao sistema com ficheiro de texto - NAO
+Adicionar linhas ao sistema com ficheiro de texto - SIM
 Calcular percursos com destino e partida indicados pelo user - NAO
       Com 1 mudança de linha -   NAO
       Com apenas a mesma linha - NAO/SIM
