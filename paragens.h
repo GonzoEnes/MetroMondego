@@ -19,7 +19,7 @@ struct paragens {
 };
 
 pParagem addParagem(pParagem p, int *tam); // adds paragem to SYSTEM
-pParagem removeParagem(pParagem p, int *tam); // remove paragem FROM SYSTEM
+pParagem removeParagem(pParagem p, char* codigo, int *tam); // remove paragem FROM SYSTEM
 void listaParagemSys(pParagem p, int tam); // lista todas as paragens do SISTEMA
 //void listaParagemByLinha(pParagem p, int tam, char* nomeLinha);
 int checkIfExistsByCode(pParagem p, char *codigo, int tam); // verifica se a paragem existe no sistema pelo codigo dado

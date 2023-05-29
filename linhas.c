@@ -23,17 +23,17 @@ void freeLinhas(pLinha linhas){
     }
 }
 
-int contemParagem(pLinha head, char* nomeParagem){
+int contemParagem(pLinha head, char* codigoParagem){
     pLinha aux = head;
     while(aux != NULL){
         for (int i = 0; i < aux->nParagens; i++){
-            if(strcmp(aux->paragens[i].nome, nomeParagem) == 0){
+            if(strcmp(aux->paragens[i].codigo, codigoParagem) == 0){
                 return 1;
             }
         }
         aux = aux->prox;
     }
-    return 0;
+    return -1;
 }
 
 int doesLinhaExist(pLinha head, char* nomeLinha){
@@ -158,16 +158,27 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
 
     if (totalParagens == 0){
         printf("\n[WARNING] Nao existem paragens no sistema. Criada linha sem lista de paragens. Atualize a linha depois para lhe adicionar paragens.\n");
-        novo->prox = NULL;
-        aux = head;
-        while(aux->prox != NULL){
-            aux = aux->prox;
+        novo->nParagens = 0;
+        novo->paragens = malloc(sizeof(paragem));
+        if (novo->paragens == NULL) {
+            printf("\nNao consegui alocar espaco para nova linha.\n");
+            free(novo);
+            return head;
         }
-        aux->prox = novo;
+        if (head == NULL) {
+            head = novo; // If the list is empty, set the new node as the head
+        } else {
+            aux = head;
+            while(aux->prox != NULL) {
+                aux = aux->prox;
+            }
+            aux->prox = novo;
+        }
         return head;
     }
 
     printf("\nQuantas paragens deseja adicionar? Existem %d paragens no sistema.\n", totalParagens);
+
     scanf(" %d", &cont);
 
     if(cont <= totalParagens){
@@ -202,7 +213,6 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
                 p[index].nLinhas++; // incrementa nLinhas for the added paragem
 
                 printf("\n[SUCESSO] Paragem [%s] adicionada a linha [%s]!\n", novaParagem.nome, novo->nomeLinha);
-
             }
             else {
                 printf("\n[ERRO] ABORTADO CRIACAO DA LINHA [%s]. Esta a tentar adicionar uma paragem que nao existe no sistema ainda! Experimente cria-la!\n", novo->nomeLinha);
@@ -233,7 +243,7 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
     }
 }
 
-pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha){
+/*pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha){ // esta lógica tem de ser toda mudada, ele esta a criar uma paragem Ourem nova e não a adicionar uma já existente.
     pLinha aux = head;
 
     if (isListEmpty(head) == 1){
@@ -243,6 +253,10 @@ pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha){
 
     while(aux != NULL){ // enquanto tiver linhas
         if(strcmp(aux->nomeLinha, nomeLinha) == 0){ // encontra a linha que o user input
+            if (quant > aux->nParagens) {
+                printf("\n[ERRO] Esta a tentar remover mais paragens que a linha contem.\n");
+                return head;
+            }
             while(aux->nParagens >= quant && quant > 0){ // enquanto a quantidade que o user inseriu for menor que o numero total de paragens e maior que 0
                 aux->paragens = removeParagem(aux->paragens, &aux->nParagens); // atualiza a lista e remove as paragens indicadas pelo user.
                 quant--; // reduz o cont // VER MELHOR
@@ -251,9 +265,106 @@ pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha){
         aux = aux->prox;
     }
     return head;
+}*/
+
+pParagem addParagemToLinha(pParagem p, pLinha head, int tam, char* nomeLinha) {
+    char codigoParagem[MAX];
+    pLinha aux = head;
+    pParagem auxP = NULL;
+    int index;
+
+    printf("\nInsira o codigo da paragem: ");
+    scanf(" %s", codigoParagem);
+
+    if (contemParagem(head, codigoParagem) != -1) {
+        printf("\n[ERRO] Paragem de codigo [%s] ja existe na linha [%s]!\n", codigoParagem, nomeLinha);
+        return aux->paragens;
+    }
+
+    while (aux != NULL) {
+        if (strcmp(aux->nomeLinha, nomeLinha) == 0) {
+            index = checkIfExistsByCode(p, codigoParagem, tam);
+            if (index == -1) {
+                printf("\n[ERRO] Paragem nao existe no sistema.\n");
+                return aux->paragens;
+            }
+
+            p[index].nLinhas++;
+
+            aux->nParagens++;
+
+            auxP = realloc(aux->paragens, (aux->nParagens) * sizeof(struct paragens));
+
+            printf("Valor: %d", aux->nParagens);
+
+            if (auxP == NULL) {
+                printf("\n[ERRO] Alloc de memoria.\n");
+                p[index].nLinhas--;
+                aux->nParagens--;
+                return aux->paragens;
+            }
+
+            aux->paragens[aux->nParagens-1] = p[index];
+
+            return auxP;
+        }
+        aux = aux->prox;
+    }
+    return auxP;
 }
 
-pLinha addParagensToLinha(pLinha head, int quant, char* nomeLinha){
+pLinha addToEndOfList(pLinha head, pLinha novoNo) {
+    pLinha aux = head;
+
+    if (head == NULL) {
+        head = novoNo;
+        return head;
+    }
+
+    while (aux->prox != NULL) {
+        aux = aux->prox;
+    }
+
+    aux->prox = novoNo;
+
+    return head;
+}
+
+pLinha rebuildLinhaFromFile(char* fileName) {
+    pLinha novo, p = NULL;
+
+    linha novoLinha;
+
+    FILE *f;
+
+    f = fopen(fileName, "rb");
+
+    if (f == NULL) {
+        printf("\n[ERRO] Nao existe ficheiro [%s]", fileName);
+        return NULL;
+    }
+
+    while (fread(&novoLinha, sizeof(linha), 1, f) == 1) {
+        novo = malloc(sizeof(linha));
+        if (novo == NULL) {
+            printf("\n[ERRO] Alocacao de memoria para nova linha! (REBUILD LINHA FROM FILE)\n");
+            fclose(f);
+            return p;
+        }
+
+        *novo = novoLinha;
+
+        novo->prox = NULL;
+
+        p = addToEndOfList(p, novo);
+    }
+
+    fclose(f);
+
+    return p;
+}
+
+pLinha addParagensToLinhaRefresh(pParagem p, pLinha head, int quant, char* nomeLinha, int totalParagens){
     pLinha aux = head;
 
     if (isListEmpty(head) == 1){
@@ -261,15 +372,21 @@ pLinha addParagensToLinha(pLinha head, int quant, char* nomeLinha){
         return head;
     }
 
+    if (quant > totalParagens) {
+        printf("\n[ERRO] Nao pode adicionar mais paragens a linha do que ja existem.\n");
+        return head;
+    }
+
     while(aux != NULL){
         if (strcmp(aux->nomeLinha, nomeLinha) == 0){
-            while(aux->nParagens >= quant && quant > 0){
-                aux->paragens = addParagem(aux->paragens, &aux->nParagens);
+            while(totalParagens >= quant && quant > 0){
+                aux->paragens = addParagemToLinha(p, aux, totalParagens, nomeLinha);
                 quant--;
             }
         }
         aux = aux->prox;
     }
+    printf("Adicionado a linha [%s] com sucesso.\n", nomeLinha);
     return head;
 }
 
@@ -304,6 +421,7 @@ pLinha removeLinha(pLinha head){
     // se encontrou, entao:
     anterior->prox = aux->prox; // arrancamos
     free(aux);
+    printf("\nLinha removida com sucesso.\n");
     return head; // devolve a lista atualizada
 }
 
@@ -341,7 +459,6 @@ void listaAllLinhaInfo(pLinha head, pParagem p, int totalParagens){
     }while(strcmp(userInput, "remover") != 0 && strcmp(userInput, "adicionar") != 0);*/
 
 void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melhor esta função para não ficar tão grande quando tiver tempo
-    pLinha aux;
     char userChoice[MAX], nomeParagem[MAX];
 
     int index; //, numLinhas = 0, flag = 0;
@@ -385,7 +502,7 @@ void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melho
 void listaInfoLinhaByParagem(pLinha head, pParagem p, int totalParagens, char nomeParagem[MAX]){
     pLinha aux;
 
-    if(contemParagem(head, nomeParagem) == 0){
+    if(contemParagem(head, nomeParagem) == -1){
         printf("\n[ERRO] Linha nao contem paragens!\n");
         return;
     }

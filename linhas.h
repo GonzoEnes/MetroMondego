@@ -10,7 +10,6 @@ typedef struct linhas linha, *pLinha;
 
 struct linhas {
     int nParagens;
-    int nLinhas;
     char nomeLinha[MAX];
     pParagem paragens;
     pLinha prox;
@@ -21,13 +20,15 @@ void decrementaFromSystem(pParagem p, pLinha head, int totalParagens);
 pLinha criaLinha(pLinha head, pParagem p, int totalParagens);
 pLinha removeLinha(pLinha head);
 pLinha removeParagensFromLinha(pLinha head, int quant, char* nomeLinha); // remove X paragens de linha Y
-pLinha addParagensToLinha(pLinha head, int quant, char* nomeLinha); // se possíve, mudar tudo para algo assim, fica mais giro // adiciona X paragens a linha Y
+pLinha addParagensToLinhaRefresh(pParagem p, pLinha head, int quant, char* nomeLinha, int totalParagens); // se possíve, mudar tudo para algo assim, fica mais giro // adiciona X paragens a linha Y
 int isListEmpty(pLinha linhas);
 void listaInfoLinha(pLinha head, pParagem p, int totalLinhas);
 void listaInfoLinhaByParagem(pLinha head, pParagem p, int totalLinhas, char nomeParagem[MAX]);
-int contemParagem(pLinha head, char* nomeParagem); // verifica se contem uma determinada paragem passada por parametro na lista de linhas
+int contemParagem(pLinha head, char* codigoParagem); // verifica se contem uma determinada paragem passada por parametro na lista de linhas
 int doesLinhaExist(pLinha head, char* nomeLinha);
 void calculaParagensSemOverflow(pLinha head, char* nomePartida, char* nomeDestino);
 void listaAllLinhaInfo(pLinha head, pParagem p, int totalParagens);
-
+pParagem addParagemToLinha(pParagem p, pLinha head, int tam, char* nomeLinha);
+pLinha rebuildLinhaFromFile(char* fileName);
+pLinha addToEndOfList(pLinha head, pLinha novoNo);
 #endif //METROMONDEGO_LINHAS_H

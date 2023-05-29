@@ -11,16 +11,21 @@ int menu(){
     printf("1 - Adicionar uma paragem\n");
     printf("2 - Remover uma paragem\n");
     printf("3 - Listar todas as paragens\n");
-    printf("4 - Terminar execucao\n");
+    printf("4 - Adicionar uma linha\n");
+    printf("5 - Remover uma linha\n");
+    printf("6 - Listar todas as linhas\n");
+    printf("7 - Calcule um percurso entre dois pontos\n");
+    printf("8 - Atualizar informacao de uma linha\n");
+    printf("9 - Terminar execucao\n");
 
     do{
         printf("\nOpcao pretendida: ");
         scanf("%d", &opcao);
 
-        if (opcao < 1 || opcao > 4)
-            printf("\nInvalido!");
+        if (opcao < 1 || opcao > 9)
+            printf("\nInput invalido!");
 
-    }while(opcao < 1 || opcao > 4);
+    }while(opcao < 1 || opcao > 9);
 
     printf("\n");
 

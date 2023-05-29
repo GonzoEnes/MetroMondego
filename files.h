@@ -6,7 +6,9 @@
 #define METROMONDEGO_FILES_H
 
 #include "paragens.h"
+#include "linhas.h"
 
 int findFileSize(char *fileName);
+void saveInfo(pLinha head, char* fileName);
 
 #endif //METROMONDEGO_FILES_H

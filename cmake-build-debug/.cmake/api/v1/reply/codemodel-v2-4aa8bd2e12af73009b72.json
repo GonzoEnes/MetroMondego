@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Goncalo/Documents/GitHub/MetroMondego_TP_P/cmake-build-debug",
-		"source" : "C:/Users/Goncalo/Documents/GitHub/MetroMondego_TP_P"
+		"build" : "C:/Users/Gonsalo/Documents/GitHub/MetroMondego_TP_P/cmake-build-debug",
+		"source" : "C:/Users/Gonsalo/Documents/GitHub/MetroMondego_TP_P"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 3
+		"minor" : 4
 	}
 }

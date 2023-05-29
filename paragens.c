@@ -2,8 +2,8 @@
 // Created by Goncalo on 17/04/2023.
 //
 
-#include "paragens.h"
 #include "utils.h"
+#include "linhas.h"
 
 pParagem addParagem(pParagem p, int *tam){
 
@@ -22,7 +22,7 @@ pParagem addParagem(pParagem p, int *tam){
     int index = checkIfExistsByName(p, novo.nome, *tam);
 
     if (index != -1) {
-        printf("\n[ERRO] Nao consigo adicionar ao sistema uma paragem que ja existe! [%s]", novo.nome);
+        printf("\n[ERRO] Nao consigo adicionar uma paragem que ja existe! [%s]", novo.nome);
         free(aux);
         return p;
     }
@@ -40,7 +40,7 @@ pParagem addParagem(pParagem p, int *tam){
     return aux;
 }
 
-pParagem removeParagem(pParagem p, int *tam){
+pParagem removeParagem(pParagem p, char* codigo, int *tam){
 
     pParagem aux = NULL;
 
@@ -48,13 +48,9 @@ pParagem removeParagem(pParagem p, int *tam){
 
     int index;
 
-    char codigo[5];
-
-    printf("\nInsira o codigo da paragem a remover: ");
-
-    scanf(" %s", codigo);
-
     index = checkIfExistsByCode(p, codigo, *tam);
+
+    printf("\n[%s]", p[index].nome);
 
     if (index != -1) {
 
@@ -69,6 +65,11 @@ pParagem removeParagem(pParagem p, int *tam){
         return p;
     }
 
+    if (*tam == 0) { // if array contains only one element, free() the list.
+        free(p);
+        return NULL;
+    }
+
     aux = realloc(p, (*tam) * sizeof(paragem));
 
     if (aux == NULL){
@@ -79,7 +80,6 @@ pParagem removeParagem(pParagem p, int *tam){
 
         return p;
     }
-
     return aux;
 }
 
