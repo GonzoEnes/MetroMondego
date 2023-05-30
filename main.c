@@ -217,7 +217,7 @@ int main() {
                     }
                     break;
                 case 9:
-                    printf("\nInsira o nome do ficheiro de texto (com .txt apos o nome): ");
+                    printf("\nInsira o nome do ficheiro de texto (com .txt apos o nome):  ");
                     scanf(" %s", nomeFich);
                     linhas = createLinhaFromTxtFile(nomeFich, linhas, p, tam);
                     break;

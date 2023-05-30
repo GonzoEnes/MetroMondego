@@ -126,6 +126,9 @@ int countNumberOfLinesInFileExceptFirst(char* fileName) {
 pLinha createLinhaFromTxtFile(char* fileName, pLinha head, pParagem p, int tam) {
     FILE *f = fopen(fileName, "rt");
     char firstLine[MAX];
+    pLinha novaLinha = NULL;
+    int index;
+    char auxParagem[MAX];
 
     if (f == NULL) {
        printf("\n[ERRO] Nao encontrei ficheiro de texto! [%s]", fileName);
@@ -134,9 +137,9 @@ pLinha createLinhaFromTxtFile(char* fileName, pLinha head, pParagem p, int tam) 
 
     if (fgets(firstLine, sizeof(firstLine), f) != NULL) {
 
-        head = malloc(sizeof(struct linhas));
+        novaLinha = malloc(sizeof(struct linhas));
 
-        if (head == NULL) {
+        if (novaLinha == NULL) {
             printf("\n[ERRO] Falha na alocacao de espaco para nova linha!\n");
             fclose(f);
             return NULL;
@@ -144,58 +147,58 @@ pLinha createLinhaFromTxtFile(char* fileName, pLinha head, pParagem p, int tam) 
 
         firstLine[strcspn(firstLine, "\n")] = 0; // remove o \n da string
 
-        strcpy(head->nomeLinha, firstLine);
+        strcpy(novaLinha->nomeLinha, firstLine);
 
-        head->nParagens = countNumberOfLinesInFileExceptFirst(fileName);
+        novaLinha->nParagens = countNumberOfLinesInFileExceptFirst(fileName);
 
-        if (head->nParagens == 0) {
+        if (novaLinha->nParagens == 0) {
             printf("\n[ERRO] Nao e possivel criar a linha sem, pelo menos, uma paragem.\n");
             free(head);
             fclose(f);
             return NULL;
         }
 
-        head->paragens = malloc(head->nParagens * sizeof(struct paragens));
+        novaLinha->paragens = malloc(novaLinha->nParagens * sizeof(struct paragens));
 
-        if (head->paragens == NULL) {
-            printf("\n[ERRO] Falha na alocacao de memoria para paragens da linha [%s]", head->nomeLinha);
+        if (novaLinha->paragens == NULL) {
+            printf("\n[ERRO] Falha na alocacao de memoria para paragens da linha [%s]", novaLinha->nomeLinha);
             free(head);
             fclose(f);
             return NULL;
         }
 
-        // continuar amanhã
-        // read again to catch paragens
+        for (int i = 0; i < novaLinha->nParagens; i++){
+            if (fgets(auxParagem, sizeof(auxParagem), f) != NULL) {
 
-        for (int i = 0; i < head->nParagens; i++){
-            if (fgets(head->paragens[i].nome, sizeof(head->paragens[i].nome), f) != NULL) {
+                auxParagem[strcspn(auxParagem, "\n")] = 0;
 
-                head->paragens[i].nome[strcspn(head->paragens[i].nome, "#")] = 0;
+                char* tok = strtok(auxParagem, "#");
 
-                int index = checkIfExistsByName(p, head->paragens[i].nome, tam);
+                strcpy(novaLinha->paragens[i].nome, tok);
+
+                tok = strtok(NULL, "#");
+
+                strcpy(novaLinha->paragens[i].codigo, tok);
+
+                printf("\nNome Paragem %d: [%s]\n", i+1, novaLinha->paragens[i].nome);
+
+                printf("\nCodigo Paragem %d: [%s]\n", i+1, novaLinha->paragens[i].codigo);
+
+                index = checkIfExistsByCode(p, novaLinha->paragens[i].codigo, tam);
 
                 if (index == -1) {
-                    printf("\n[ERRO] Paragem [%s] nao existe no sistema. Abortada a criacao da linha [%s].\n", head->paragens[i].nome, head->nomeLinha);
+                    printf("\n[ERRO] Paragem de codigo [%s] nao existe no sistema. Abortada a criacao da linha [%s].\n", novaLinha->paragens[i].codigo, novaLinha->nomeLinha);
                     fclose(f);
-                    free(head->paragens);
-                    free(head);
+                    free(novaLinha->paragens);
+                    free(novaLinha);
                     return NULL;
                 }
 
                 p[index].nLinhas++;
 
-                head->paragens[i].nLinhas = p[index].nLinhas;
+                novaLinha->paragens[i].nLinhas = p[index].nLinhas;
 
-                /*if (fgets(head->paragens[i].codigo, sizeof(head->paragens[i].codigo), f) != NULL) {
-                    printf("\nLinha [%s] lida com sucesso do ficheiro [%s]! Consulte as linhas para mais informacao.\n", head->nomeLinha, fileName);
-                    return head;
-                }*/
-
-                //head->paragens[i].codigo[strcspn(head->paragens[i].codigo, "\n")] = 0;
-
-                // dar fix agora ao codigo da paragem,ler dpois do delimitador
-
-                printf("\n[ERRO] Ficheiro mal formatado. Nao existem paragens.\n");
+                novaLinha->prox = NULL;
             }
         }
     }
@@ -204,6 +207,11 @@ pLinha createLinhaFromTxtFile(char* fileName, pLinha head, pParagem p, int tam) 
         return NULL;
     }
 
+    head = addToEndOfList(head, novaLinha);
+
+    printf("\n[NOTIFICACAO] Linha [%s] criada com sucesso!\n", novaLinha->nomeLinha);
+
     fclose(f);
+
     return head;
 }
