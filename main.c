@@ -2,7 +2,7 @@
 #include "paragens.h"
 #include "menu.h"
 #include "linhas.h"
-#include "files.h"
+#include "fileHandling.h"
 
 int main() {
     pParagem p = NULL; // array dinamico pointer
@@ -21,6 +21,8 @@ int main() {
 
     int tam = 0, n_paragens = 0, totalLinhas = 0;
 
+    setbuf(stdout, NULL);
+
     srand(time(NULL));
 
     linhas = rebuildLinhaFromFile("saveLinhas.bin");
@@ -30,8 +32,14 @@ int main() {
     if (p == NULL) {
         printf("\nFicheiro esta vazio. Nao acrescentei novas paragens.\n");
     }
+    else {
+        printf("\nFicheiro detetado. A reconstruir paragens de ficheiro binario...\n");
+    }
     if (linhas == NULL) {
         printf("\nFicheiro estava vazio.\nNao acrescentei novas linhas.\n");
+    }
+    else {
+        printf("\nFicheiro detetado. A reconstruir linhas de ficheiro binario...\n");
     }
 
     /*
@@ -158,11 +166,19 @@ int main() {
 
                     do {
                         printf("\nPonto partida: ('fim' para acabar)");
-                        scanf(" %s", pontoPartida);
+
+                        fgets(pontoPartida, sizeof(pontoPartida), stdin);
+
+                        pontoPartida[strcspn(pontoPartida, "\n")] = 0;
+
                         printf("\nInseriu: %s", pontoPartida);
 
                         printf("\nPonto chegada: ('fim' para acabar)");
-                        scanf(" %s", pontoChegada);
+
+                        fgets(pontoChegada, sizeof(pontoChegada), stdin);
+
+                        pontoChegada[strcspn(pontoChegada, "\n")] = 0;
+
                         printf("\nInseriu: %s", pontoChegada);
 
                         calculaParagensSemOverflow(linhas, pontoPartida, pontoChegada);
@@ -175,13 +191,20 @@ int main() {
                     break;
                 case 8:
                     printf("\nInsira o nome da linha: ");
-                    scanf(" %s", updater);
+
+                    fflush(stdin);
+
+                    fgets(updater, sizeof(updater), stdin);
+
+                    updater[strcspn(updater, "\n")] = 0;
+
                     printf("\n1 - Remover paragens de linha [%s]\n2 - Adicionar paragens a linha [%s]\nChoice: ", updater, updater);
+
                     scanf(" %d", &choiceOfUpdate);
                     if (choiceOfUpdate == 1){
                         printf("\nQuantas paragens deseja remover da linha [%s]? ", updater);
                         scanf(" %d", &quantParagens);
-                        linhas = removeParagemFromLinha(linhas, quantParagens, updater);
+                        linhas = removeParagemFromLinha(linhas, p, tam, quantParagens, updater);
                     }
                     else if (choiceOfUpdate == 2) {
                         printf("\nQuantas paragens deseja adicionar a linha [%s]? ", updater);

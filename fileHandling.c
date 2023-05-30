@@ -1,7 +1,7 @@
 //
 // Created by Goncalo on 17/04/2023.
 //
-#include "files.h"
+#include "fileHandling.h"
 
 int findFileSize(char* fileName) {
     FILE *f = fopen(fileName, "rt");
@@ -68,6 +68,7 @@ int getNumOfStructsInFile(char* fileName) {
     }
 
     fclose(f);
+    
     return total;
 }
 
@@ -97,4 +98,75 @@ pParagem readParagensFromFile(char* fileName, int *total) {
     fclose(f);
 
     return p;
+}
+
+int countNumberOfLinesInFileExceptFirst(char* fileName) {
+    FILE *f = fopen(fileName, "rt");
+    int isFirst = 0;
+    int totalLines = 0;
+    char line[MAX];
+
+    if (f == NULL) {
+        printf("\n[ERRO] Falha na abertura de ficheiro [%s]", fileName);
+        return -1;
+    }
+
+    while (fgets(line, sizeof(line), f) != NULL) {
+        if (isFirst == 0) {
+            isFirst = 1;
+        }
+        else {
+            totalLines++;
+        }
+    }
+
+    return totalLines;
+}
+
+pLinha createLinhaFromTxtFile(char* fileName, pLinha head) {
+    FILE *f = fopen(fileName, "rt");
+    char firstLine[MAX];
+
+    if (f == NULL) {
+       printf("\n[ERRO] Nao encontrei ficheiro de texto! [%s]", fileName);
+       return NULL;
+    }
+
+    if (fgets(firstLine, sizeof(firstLine), f) != NULL) {
+        head = malloc(sizeof(struct linhas));
+        if (head == NULL) {
+            printf("\n[ERRO] Falha na alocacao de espaco para nova linha!\n");
+            fclose(f);
+            return NULL;
+        }
+
+        strcpy(head->nomeLinha, firstLine);
+
+        head->nParagens = countNumberOfLinesInFileExceptFirst(fileName);
+
+        if (head->nParagens == 0) {
+            printf("\n[ERRO] Nao e possivel criar a linha sem, pelo menos, uma paragem.\n");
+            free(head);
+            fclose(f);
+            return NULL;
+        }
+
+        head->paragens = malloc(head->nParagens * sizeof(struct paragens));
+
+        if (head->paragens == NULL) {
+            printf("\n[ERRO] Falha na alocacao de memoria para paragens da linha [%s]", head->nomeLinha);
+            free(head);
+            fclose(f);
+            return NULL;
+        }
+
+        // continuar amanhã
+    }
+    else {
+        printf("\n[ERRO] Ficheiro vazio. A terminar...\n");
+        return NULL;
+    }
+
+    fclose(f);
+    return head;
 }

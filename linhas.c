@@ -147,7 +147,11 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
 
     printf("\nQual o nome da linha? \n");
 
-    scanf(" %s", novo->nomeLinha);
+    fflush(stdin);
+
+    fgets(novo->nomeLinha, sizeof(novo->nomeLinha), stdin);
+
+    novo->nomeLinha[strcspn(novo->nomeLinha, "\n")] = 0;
 
     novo->prox = NULL;
 
@@ -179,7 +183,12 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
 
         for (int i = 0; i < novo->nParagens; i++){
             printf("\nInsira o nome da %da paragem a adicionar: ", i+1);
-            scanf(" %s", novo->paragens[i].nome);
+
+            fflush(stdin);
+
+            fgets(novo->paragens[i].nome, sizeof(novo->paragens[i].nome), stdin);
+
+            novo->paragens[i].nome[strcspn(novo->paragens[i].nome, "\n")] = 0;
 
             /*if(strcmp(novo->paragens[i].nome, nomeParagem) == 0){ // verificar se essa paragem já foi adicionada aquando a criação DAR DEBUG
                 printf("\n[ERRO] Esta paragem ja se encontra na linha!\n");
@@ -227,10 +236,9 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
     }
 }
 
-pLinha removeParagemFromLinha(pLinha head, int quant, char* nomeLinha){ // esta lógica tem de ser toda mudada, ele esta a criar uma paragem Ourem nova e não a adicionar uma já existente.
+pLinha removeParagemFromLinha(pLinha head, pParagem p, int tam, int quant, char* nomeLinha){
     pLinha aux = head;
-    char codigoParagem[MAX];
-
+    int index;
     if (isListEmpty(head) == 1){
         printf("\n[ERRO] Lista vazia.\n");
         return head;
@@ -238,6 +246,7 @@ pLinha removeParagemFromLinha(pLinha head, int quant, char* nomeLinha){ // esta 
 
     while(aux != NULL){ // enquanto tiver linhas
         if(strcmp(aux->nomeLinha, nomeLinha) == 0){ // encontra a linha que o user input
+            char codigoParagem[MAX];
             printf("\nInsira o codigo da paragem a remover: ");
             scanf(" %s", codigoParagem);
             if (quant > aux->nParagens) {
@@ -246,6 +255,8 @@ pLinha removeParagemFromLinha(pLinha head, int quant, char* nomeLinha){ // esta 
             }
             while(aux->nParagens >= quant && quant > 0){ // enquanto a quantidade que o user inseriu for menor que o numero total de paragens e maior que 0
                 aux->paragens = removeParagem(aux->paragens, codigoParagem, &aux->nParagens); // atualiza a lista e remove as paragens indicadas pelo user.
+                index = checkIfExistsByCode(p, codigoParagem, tam);
+                p[index].nLinhas--;
                 quant--; // reduz o cont // VER MELHOR
             }
         }
@@ -304,6 +315,7 @@ pParagem addParagemToLinha(pParagem p, pLinha head, int tam, char* nomeLinha) {
     pLinha aux = head;
     int index;
     pParagem auxP = NULL;
+    fflush(stdin);
 
     printf("\nInsira o codigo da paragem: ");
     scanf(" %s", codigoParagem);
@@ -326,8 +338,6 @@ pParagem addParagemToLinha(pParagem p, pLinha head, int tam, char* nomeLinha) {
             aux->nParagens++;
 
             auxP = realloc(aux->paragens, (aux->nParagens) * sizeof(struct paragens));
-
-            printf("Valor: %d", aux->nParagens);
 
             if (auxP == NULL) {
                 printf("\n[ERRO] Alloc de memoria.\n");
@@ -453,7 +463,12 @@ pLinha removeLinha(pLinha head){
     }
 
     printf("\nInsira o nome da linha que deseja remover: ");
-    scanf(" %s", nomeLinha);
+
+    fflush(stdin);
+
+    fgets(nomeLinha, sizeof(nomeLinha), stdin);
+
+    nomeLinha[strcspn(nomeLinha, "\n")] = 0;
 
     if (aux != NULL && strcmp(aux->nomeLinha, nomeLinha) == 0){ // se o nó a remover for a raiz então
         head = aux->prox; // a raiz é o proximo no (NULL)
@@ -529,7 +544,11 @@ void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melho
         do{
             printf("\nInsira o nome da paragem a procurar: ");
 
-            scanf(" %s", nomeParagem);
+            fflush(stdin);
+
+            fgets(nomeParagem, sizeof(nomeParagem), stdin);
+
+            nomeParagem[strcspn(nomeParagem, "\n")] = 0;
 
             listaInfoLinhaByParagem(head, p, totalParagens, nomeParagem);
                 //printf("\nTotal: [%d] linhas passam por [%s]\n", numLinhas, nomeParagem); ARRANJAR MANEIRA DE PRINTAR ISTO

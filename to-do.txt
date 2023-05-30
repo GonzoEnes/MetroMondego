@@ -40,3 +40,4 @@ Criação de uma UI com menu e assim - SIM
 Arranjar o bug visual com o nLinhas quando se criam mais que uma linha (o problema está quando crias 2 linhas (ou mais) e o nLinhas da primeira linha não atualiza) - NAO
 Quando uma paragem é removida do sistema, a(s) linha(s) que a tinham, já não a podem ter mais - NAO (no removerParagem do sistema, aceita um pLinha e percorre depois de ter sido removido para a tirar de lá) - NAO
 seg fault quando tentas por uma paragem igual que já existe no sistema após a criação de uma linha - NAO
+Quando voltas a adicionar uma paragem que já removeste a uma linha, essa paragem não te deixa voltar a por - NAO

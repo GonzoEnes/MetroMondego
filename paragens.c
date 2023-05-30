@@ -10,7 +10,16 @@ pParagem addParagem(pParagem p, int *tam){
     paragem novo;
 
     printf("\nIntroduza o nome da paragem: ");
-    scanf(" %s", novo.nome);
+
+    fflush(stdin);
+
+    fgets(novo.nome, sizeof(novo.nome), stdin);
+
+    novo.nome[strcspn(novo.nome, "\n")] = 0;
+
+    printf("%s", novo.nome);
+
+    //novo.nome[strcspn(novo.nome, "\n")] = 0;
 
     int index = checkIfExistsByName(p, novo.nome, *tam);
 
@@ -30,7 +39,7 @@ pParagem addParagem(pParagem p, int *tam){
 
     novo.nLinhas = 0; // inicialmente não pertence a nenhuma linha
 
-    printf("\nA atribuir o codigo... [%s]", novo.codigo);
+    printf("\n[NOTIFICACAO]A atribuir o codigo... [%s]", novo.codigo);
 
     aux[(*tam)] = novo;
 
@@ -38,7 +47,6 @@ pParagem addParagem(pParagem p, int *tam){
 
     return aux;
 }
-
 
 pParagem removeParagem(pParagem p, char* codigo, int *tam){
 
@@ -74,7 +82,7 @@ pParagem removeParagem(pParagem p, char* codigo, int *tam){
 
     if (aux == NULL){
 
-        printf("\nErro na alocacao de memoria ao remover.\n");
+        printf("\n[ERRO] Alocacao de memoria ao remover.\n");
 
         p[index] = retorna;
 

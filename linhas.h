@@ -19,7 +19,7 @@ void freeLinhas(pLinha linhas);
 void decrementaFromSystem(pParagem p, pLinha head, int totalParagens);
 pLinha criaLinha(pLinha head, pParagem p, int totalParagens);
 pLinha removeLinha(pLinha head);
-pLinha removeParagemFromLinha(pLinha head, int quant, char* nomeLinha); // remove X paragens de linha Y
+pLinha removeParagemFromLinha(pLinha head, pParagem p, int tam, int quant, char* nomeLinha); // remove X paragens de linha Y
 int isListEmpty(pLinha linhas);
 void listaInfoLinha(pLinha head, pParagem p, int totalLinhas);
 void listaInfoLinhaByParagem(pLinha head, pParagem p, int totalLinhas, char nomeParagem[MAX]);
