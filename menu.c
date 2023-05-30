@@ -16,16 +16,17 @@ int menu(){
     printf("6 - Listar todas as linhas\n");
     printf("7 - Calcule um percurso entre dois pontos\n");
     printf("8 - Atualizar informacao de uma linha\n");
-    printf("9 - Terminar execucao\n");
+    printf("9 - Criar uma linha de um ficheiro de texto\n");
+    printf("10 - Terminar execucao");
 
     do{
         printf("\nOpcao pretendida: ");
         scanf("%d", &opcao);
 
-        if (opcao < 1 || opcao > 9)
+        if (opcao < 1 || opcao > 10)
             printf("\nInput invalido!");
 
-    }while(opcao < 1 || opcao > 9);
+    }while(opcao < 1 || opcao > 10);
 
     printf("\n");
 

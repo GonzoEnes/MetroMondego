@@ -17,7 +17,7 @@ int main() {
 
     int toAdd, choice, choiceOfUpdate, quantParagens;
 
-    char pontoPartida[MAX], pontoChegada[MAX], updater[MAX];
+    char pontoPartida[MAX], pontoChegada[MAX], updater[MAX], nomeFich[MAX];
 
     int tam = 0, n_paragens = 0, totalLinhas = 0;
 
@@ -217,6 +217,11 @@ int main() {
                     }
                     break;
                 case 9:
+                    printf("\nInsira o nome do ficheiro de texto (com .txt apos o nome): ");
+                    scanf(" %s", nomeFich);
+                    linhas = createLinhaFromTxtFile(nomeFich, linhas, p, tam);
+                    break;
+                case 10:
                     printf("A terminar execucao...\n");
                     printf("A guardar no ficheiro todas as estruturas antes de terminar...\n");
                     saveInfoLinha(linhas, "saveLinhas.bin");
@@ -226,7 +231,7 @@ int main() {
                     printf("\nInsira um input valido!\n");
                     break;
             }
-        }while(choice != 9);
+        }while(choice != 10);
 
     free(p);
 

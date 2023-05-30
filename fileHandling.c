@@ -123,7 +123,7 @@ int countNumberOfLinesInFileExceptFirst(char* fileName) {
     return totalLines;
 }
 
-pLinha createLinhaFromTxtFile(char* fileName, pLinha head) {
+pLinha createLinhaFromTxtFile(char* fileName, pLinha head, pParagem p, int tam) {
     FILE *f = fopen(fileName, "rt");
     char firstLine[MAX];
 
@@ -133,12 +133,16 @@ pLinha createLinhaFromTxtFile(char* fileName, pLinha head) {
     }
 
     if (fgets(firstLine, sizeof(firstLine), f) != NULL) {
+
         head = malloc(sizeof(struct linhas));
+
         if (head == NULL) {
             printf("\n[ERRO] Falha na alocacao de espaco para nova linha!\n");
             fclose(f);
             return NULL;
         }
+
+        firstLine[strcspn(firstLine, "\n")] = 0; // remove o \n da string
 
         strcpy(head->nomeLinha, firstLine);
 
@@ -161,6 +165,39 @@ pLinha createLinhaFromTxtFile(char* fileName, pLinha head) {
         }
 
         // continuar amanhã
+        // read again to catch paragens
+
+        for (int i = 0; i < head->nParagens; i++){
+            if (fgets(head->paragens[i].nome, sizeof(head->paragens[i].nome), f) != NULL) {
+
+                head->paragens[i].nome[strcspn(head->paragens[i].nome, "#")] = 0;
+
+                int index = checkIfExistsByName(p, head->paragens[i].nome, tam);
+
+                if (index == -1) {
+                    printf("\n[ERRO] Paragem [%s] nao existe no sistema. Abortada a criacao da linha [%s].\n", head->paragens[i].nome, head->nomeLinha);
+                    fclose(f);
+                    free(head->paragens);
+                    free(head);
+                    return NULL;
+                }
+
+                p[index].nLinhas++;
+
+                head->paragens[i].nLinhas = p[index].nLinhas;
+
+                /*if (fgets(head->paragens[i].codigo, sizeof(head->paragens[i].codigo), f) != NULL) {
+                    printf("\nLinha [%s] lida com sucesso do ficheiro [%s]! Consulte as linhas para mais informacao.\n", head->nomeLinha, fileName);
+                    return head;
+                }*/
+
+                //head->paragens[i].codigo[strcspn(head->paragens[i].codigo, "\n")] = 0;
+
+                // dar fix agora ao codigo da paragem,ler dpois do delimitador
+
+                printf("\n[ERRO] Ficheiro mal formatado. Nao existem paragens.\n");
+            }
+        }
     }
     else {
         printf("\n[ERRO] Ficheiro vazio. A terminar...\n");

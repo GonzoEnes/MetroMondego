@@ -1,6 +1,6 @@
-CMakeFiles/MetroMondego.dir/linhas.c.obj: \
- C:\Users\Utilizador\Documents\GitHub\MetroMondego_TP_P\linhas.c \
- C:\Users\Utilizador\Documents\GitHub\MetroMondego_TP_P\linhas.h \
+CMakeFiles/MetroMondego.dir/fileHandling.c.obj: \
+ C:\Users\Utilizador\Documents\GitHub\MetroMondego_TP_P\fileHandling.c \
+ C:\Users\Utilizador\Documents\GitHub\MetroMondego_TP_P\fileHandling.h \
  C:\Users\Utilizador\Documents\GitHub\MetroMondego_TP_P\paragens.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
@@ -24,4 +24,5 @@ CMakeFiles/MetroMondego.dir/linhas.c.obj: \
  C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/mm_malloc.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/x86_64-w64-mingw32/include/string.h \
- C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h
+ C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:\Users\Utilizador\Documents\GitHub\MetroMondego_TP_P\linhas.h
