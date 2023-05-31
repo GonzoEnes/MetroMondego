@@ -252,9 +252,14 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
         }
         return head;
     }
-    else
+    else if (cont > totalParagens)
     {
         printf("\n[ERRO] Esta a tentar adicionar mais paragens a linha [%s] do que existem no sistema!", novo->nomeLinha);
+        free(novo);
+        return head;
+    }
+    else {
+        printf("\n[ERRO] Esta a inserir um numero negativo. Abortada a criacao...\n");
         free(novo);
         return head;
     }
