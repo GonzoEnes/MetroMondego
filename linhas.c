@@ -258,7 +258,7 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
         free(novo);
         return head;
     }
-    else {
+    else if (cont < 0){
         printf("\n[ERRO] Esta a inserir um numero negativo. Abortada a criacao...\n");
         free(novo);
         return head;
