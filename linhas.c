@@ -11,37 +11,6 @@ int isListEmpty(pLinha linhas){
     return 0;
 }
 
-void incrementaAfterAdding(pLinha head, char* nomeLinha) {
-    if (head == NULL) {
-        return;
-    }
-
-    pLinha aux = head;
-
-    while (aux != NULL) {
-        if (strcmp(head->nomeLinha, nomeLinha) != 0) {
-            aux->nParagens++;
-        }
-        aux = aux->prox;
-    }
-}
-
-void decrementaAfterRemoving(pLinha head, char* nomeLinha) {
-
-    if (head == NULL) {
-        return;
-    }
-
-    pLinha aux = head;
-
-    while (aux != NULL) {
-        if (strcmp(head->nomeLinha, nomeLinha) != 0) {
-            aux->nParagens--;
-        }
-        aux = aux->prox;
-    }
-}
-
 void freeLinhas(pLinha linhas){
     pLinha linhasTemp;
 
