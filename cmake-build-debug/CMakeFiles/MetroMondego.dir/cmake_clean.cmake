@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/MetroMondego.dir/files.c.obj"
-  "CMakeFiles/MetroMondego.dir/files.c.obj.d"
+  "CMakeFiles/MetroMondego.dir/fileHandling.c.obj"
+  "CMakeFiles/MetroMondego.dir/fileHandling.c.obj.d"
   "CMakeFiles/MetroMondego.dir/linhas.c.obj"
   "CMakeFiles/MetroMondego.dir/linhas.c.obj.d"
   "CMakeFiles/MetroMondego.dir/main.c.obj"

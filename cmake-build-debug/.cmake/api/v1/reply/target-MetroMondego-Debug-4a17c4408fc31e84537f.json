@@ -150,7 +150,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "files.c",
+			"path" : "fileHandling.c",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -177,7 +177,7 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "files.h",
+			"path" : "fileHandling.h",
 			"sourceGroupIndex" : 1
 		}
 	],

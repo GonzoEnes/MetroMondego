@@ -17,8 +17,6 @@ pParagem addParagem(pParagem p, int *tam){
 
     novo.nome[strcspn(novo.nome, "\n")] = 0;
 
-    printf("%s", novo.nome);
-
     //novo.nome[strcspn(novo.nome, "\n")] = 0;
 
     int index = checkIfExistsByName(p, novo.nome, *tam);
@@ -39,7 +37,7 @@ pParagem addParagem(pParagem p, int *tam){
 
     novo.nLinhas = 0; // inicialmente não pertence a nenhuma linha
 
-    printf("\n[NOTIFICACAO]A atribuir o codigo... [%s]", novo.codigo);
+    printf("\n[NOTIFICACAO] A atribuir o codigo... [%s]", novo.codigo);
 
     aux[(*tam)] = novo;
 

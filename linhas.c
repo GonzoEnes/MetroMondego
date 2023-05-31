@@ -11,6 +11,37 @@ int isListEmpty(pLinha linhas){
     return 0;
 }
 
+void incrementaAfterAdding(pLinha head, char* nomeLinha) {
+    if (head == NULL) {
+        return;
+    }
+
+    pLinha aux = head;
+
+    while (aux != NULL) {
+        if (strcmp(head->nomeLinha, nomeLinha) != 0) {
+            aux->nParagens++;
+        }
+        aux = aux->prox;
+    }
+}
+
+void decrementaAfterRemoving(pLinha head, char* nomeLinha) {
+
+    if (head == NULL) {
+        return;
+    }
+
+    pLinha aux = head;
+
+    while (aux != NULL) {
+        if (strcmp(head->nomeLinha, nomeLinha) != 0) {
+            aux->nParagens--;
+        }
+        aux = aux->prox;
+    }
+}
+
 void freeLinhas(pLinha linhas){
     pLinha linhasTemp;
 
@@ -39,7 +70,6 @@ int contemParagem(pLinha head, char* codigoParagem){
 int doesLinhaExist(pLinha head, char* nomeLinha){
     while (head != NULL){
         if(strcmp(head->nomeLinha, nomeLinha) == 0){ // se ja existir essa
-            printf("\n[ERRO] Nao foi possivel adicionar linha [%s]. Ja existe na lista.\n", nomeLinha);
             return 1;
         }
         head = head->prox;
@@ -66,7 +96,39 @@ void calculaParagensSemOverflow(pLinha head, char* nomePartida, char* nomeDestin
         return;
     }
 
-    while(aux != NULL){
+    while (aux != NULL) {
+        for (int i = 0; i < aux->nParagens; i++) {
+            if (strcmp(nomePartida, aux->paragens[i].nome) == 0) {
+                for (int j = (i + 1) % aux->nParagens; j != i; j = (j + 1) % aux->nParagens) {
+                    if (strcmp(nomeDestino, aux->paragens[j].nome) == 0) {
+                        printf("\n------------------------------------------------------------------------------\n");
+
+                        printf("\n[NOTIFICACAO] Este percurso pode ser feito pela linha: [%s]", aux->nomeLinha);
+
+                        printf("\nA listar todo o percurso que fara entre [%s] a [%s]\n", nomePartida, nomeDestino);
+
+                        if (i < j) {
+                            printf("[%s] ->", nomePartida);
+                            for (int k = i + 1; k < j; k++) {
+                                printf(" [%s] -> ", aux->paragens[k].nome);
+                            }
+                            printf(" [%s] \n", nomeDestino);
+                        } else {
+                            printf("[%s] ->", nomePartida);
+                            for (int k = i - 1; k != j; k = (k - 1 + aux->nParagens) % aux->nParagens) {
+                                printf(" [%s] -> ", aux->paragens[k].nome);
+                            }
+                            printf(" [%s] \n", nomeDestino);
+                        }
+                        // Encerra a função após imprimir os elementos
+                    }
+                }
+            }
+        }
+        aux = aux->prox;
+    }
+
+    /*while(aux != NULL){
         for (int i = 0; i < aux->nParagens; i++){
             if (strcmp(aux->paragens[i].nome, nomePartida) == 0){
                 indexStartPoint = i;
@@ -118,7 +180,7 @@ void calculaParagensSemOverflow(pLinha head, char* nomePartida, char* nomeDestin
             }
         }
         aux = aux->prox;
-    }
+    }*/
 }
 
 void decrementaFromSystem(pParagem p, pLinha head, int totalParagens){
@@ -190,12 +252,6 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
 
             novo->paragens[i].nome[strcspn(novo->paragens[i].nome, "\n")] = 0;
 
-            /*if(strcmp(novo->paragens[i].nome, nomeParagem) == 0){ // verificar se essa paragem já foi adicionada aquando a criação DAR DEBUG
-                printf("\n[ERRO] Esta paragem ja se encontra na linha!\n");
-                decrementaFromSystem(p, novo, totalParagens);
-                return head;
-            }*/
-
             int index = checkIfExistsByName(p, novo->paragens[i].nome, totalParagens); // verifica se existe essa paragem no sistema
 
             if (index != -1){
@@ -225,7 +281,6 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
             }
             aux->prox = novo; // adiciona no fim da lista
         }
-
         return head;
     }
     else
@@ -236,9 +291,10 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
     }
 }
 
-pLinha removeParagemFromLinha(pLinha head, pParagem p, int tam, int quant, char* nomeLinha){
+pLinha removeParagemFromLinha(pLinha head, pParagem p, int tam, char* nomeLinha){
     pLinha aux = head;
     int index;
+
     if (isListEmpty(head) == 1){
         printf("\n[ERRO] Lista vazia.\n");
         return head;
@@ -247,68 +303,26 @@ pLinha removeParagemFromLinha(pLinha head, pParagem p, int tam, int quant, char*
     while(aux != NULL){ // enquanto tiver linhas
         if(strcmp(aux->nomeLinha, nomeLinha) == 0){ // encontra a linha que o user input
             char codigoParagem[MAX];
+
             printf("\nInsira o codigo da paragem a remover: ");
+
             scanf(" %s", codigoParagem);
-            if (quant > aux->nParagens) {
-                printf("\n[ERRO] Esta a tentar remover mais paragens que a linha contem.\n");
-                return head;
-            }
-            while(aux->nParagens >= quant && quant > 0){ // enquanto a quantidade que o user inseriu for menor que o numero total de paragens e maior que 0
-                aux->paragens = removeParagem(aux->paragens, codigoParagem, &aux->nParagens); // atualiza a lista e remove as paragens indicadas pelo user.
-                index = checkIfExistsByCode(p, codigoParagem, tam);
-                p[index].nLinhas--;
-                quant--; // reduz o cont // VER MELHOR
-            }
-        }
-        aux = aux->prox;
-    }
-    return head;
-}
 
-/* ANTIGO
- * pParagem removeParagemFromLinha(pParagem p, pLinha head, int tam, char* nomeLinha){ // esta lógica tem de ser toda mudada, ele esta a criar uma paragem Ourem nova e não a adicionar uma já existente.
-    pLinha aux = head;
-    char codigoParagem[MAX];
-    int index;
-    paragem retorna;
+            aux->paragens = removeParagem(aux->paragens, codigoParagem, &aux->nParagens); // atualiza a lista e remove as paragens indicadas pelo user.
 
-    pParagem auxP = NULL;
-
-    printf("\nInsira o codigo da paragem: ");
-    scanf(" %s", codigoParagem);
-
-    /*if (contemParagem(head, codigoParagem) == -1) {
-        printf("\n[ERRO] Impossivel remover uma paragem que nao existe na linha %s.\n", nomeLinha);
-        return aux->paragens;
-    } ainda nao sei se isto é preciso
-
-    while (aux != NULL) {
-        if (strcmp(aux->nomeLinha, nomeLinha) == 0) {
-            index = checkIfExistsByCode(aux->paragens, codigoParagem, aux->nParagens);
-            if (index == -1) {
-                printf("\n[ERRO] Nao encontro a paragem de codigo [%s]", codigoParagem);
-                return aux->paragens;
-            }
-
-            retorna = aux->paragens[index];
+            index = checkIfExistsByCode(p, codigoParagem, tam);
 
             p[index].nLinhas--;
 
-            aux->nParagens--;
+            printf("\n[NOTIFICACAO] Paragem [%s] removida da linha [%s] com sucesso!\n", p[index].nome, aux->nomeLinha);
 
-            auxP = realloc(aux->paragens, (aux->nParagens) * sizeof(struct paragens));
-
-            if (auxP == NULL) {
-                printf("\n[ERRO] Alocacao de memoria para remover paragem de linha [%s]", nomeLinha);
-                p[index].nLinhas++;
-                aux->nParagens++;
-                // guardar a posição que removeu se falhar para depois voltar a por no sitio obv
-                return aux->paragens;
-            }
+            return head;
         }
         aux = aux->prox;
     }
-}*/
+
+    return head;
+}
 
 pParagem addParagemToLinha(pParagem p, pLinha head, int tam, char* nomeLinha) {
     char codigoParagem[MAX];
@@ -427,7 +441,7 @@ pLinha rebuildLinhaFromFile(char* fileName) {
     return p;
 }
 
-pLinha addParagensToLinhaRefresh(pParagem p, pLinha head, int quant, char* nomeLinha, int totalParagens){
+pLinha addParagensToLinhaRefresh(pParagem p, pLinha head, char* nomeLinha, int totalParagens){
     pLinha aux = head;
 
     if (isListEmpty(head) == 1){
@@ -435,25 +449,23 @@ pLinha addParagensToLinhaRefresh(pParagem p, pLinha head, int quant, char* nomeL
         return head;
     }
 
-    if (quant > totalParagens) {
+    /*if (quant > totalParagens) {
         printf("\n[ERRO] Nao pode adicionar mais paragens a linha do que ja existem.\n");
         return head;
-    }
+    }*/
 
     while(aux != NULL){
         if (strcmp(aux->nomeLinha, nomeLinha) == 0){
-            while(totalParagens >= quant && quant > 0){
-                aux->paragens = addParagemToLinha(p, aux, totalParagens, nomeLinha);
-                quant--;
-            }
+            aux->paragens = addParagemToLinha(p, aux, totalParagens, nomeLinha);
+            //return head;
         }
         aux = aux->prox;
     }
-    printf("Adicionado a linha [%s] com sucesso.\n", nomeLinha);
+
     return head;
 }
 
-pLinha removeLinha(pLinha head){
+pLinha removeLinha(pLinha head, pParagem p, int tam){
     pLinha aux = head, anterior;
     char nomeLinha[MAX];
 
@@ -488,12 +500,17 @@ pLinha removeLinha(pLinha head){
 
     // se encontrou, entao:
     anterior->prox = aux->prox; // arrancamos
+
     free(aux);
+
     printf("\nLinha removida com sucesso.\n");
+
+    decrementaFromSystem(p, head, tam);
+
     return head; // devolve a lista atualizada
 }
 
-void listaAllLinhaInfo(pLinha head, pParagem p, int totalParagens){
+void listaAllLinhaInfo(pLinha head){
     pLinha aux = head;
     printf("\nA LISTAR INFO DE TODAS AS LINHAS\n");
     while(aux != NULL){
@@ -501,8 +518,16 @@ void listaAllLinhaInfo(pLinha head, pParagem p, int totalParagens){
             printf("-----------------------------------------------------");
             printf("\nNome da linha: [%s]\n", aux->nomeLinha);
             printf("\nPossui [%d] paragens.\n", aux->nParagens);
-            printf("\nAqui estao: ");
-            listaParagemSys(aux->paragens, aux->nParagens);
+            printf("\nAqui estao: \n");
+            for (int i = 0; i < aux->nParagens; i++) {
+                printf("\nParagem %d: \n", i+1);
+
+                printf("Nome: %s\n", aux->paragens[i].nome);
+
+                printf("Codigo: %s\n", aux->paragens[i].codigo);
+
+                printf("\n");
+            }
             printf("-----------------------------------------------------");
         }
         else {
@@ -537,7 +562,7 @@ void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melho
     }while(strcmp(userChoice, "paragem") != 0 && strcmp(userChoice, "todas") != 0);
 
     if(strcmp(userChoice, "todas") == 0){
-        listaAllLinhaInfo(head, p, totalParagens);
+        listaAllLinhaInfo(head);
     }
 
     else if (strcmp(userChoice, "paragem") == 0){
@@ -551,7 +576,7 @@ void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melho
             nomeParagem[strcspn(nomeParagem, "\n")] = 0;
 
             listaInfoLinhaByParagem(head, p, totalParagens, nomeParagem);
-                //printf("\nTotal: [%d] linhas passam por [%s]\n", numLinhas, nomeParagem); ARRANJAR MANEIRA DE PRINTAR ISTO
+            //printf("\nTotal: [%d] linhas passam por [%s]\n", numLinhas, nomeParagem); ARRANJAR MANEIRA DE PRINTAR ISTO
             if (strcmp(nomeParagem, "fim") == 0){
                 printf("A interromper a listagem...\n");
             }
@@ -574,17 +599,10 @@ void listaInfoLinhaByParagem(pLinha head, pParagem p, int totalParagens, char no
         aux = head;
         while(aux != NULL){
             for (int i = 0; i < aux->nParagens; i++){
-                if(strcmp(nomeParagem, aux->paragens[i].nome) == 0){
+                if(strcmp(nomeParagem, aux->paragens[i].nome) == 0) {
                     printf("\nNome linha: [%s]\n", aux->nomeLinha);
                     printf("Numero de paragens: [%d]\n", aux->nParagens);
                 }
-                /*else { // dar fix a este else
-                    if(flag == 0){
-                        printf("\n[ERRO] Nenhuma linha contem a paragem descrita.\n");
-                        flag = 1;
-                    }
-
-                }*/
             }
             aux = aux->prox;
         }

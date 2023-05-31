@@ -128,29 +128,29 @@ MetroMondego/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MetroMondego.dir\build.make CMakeFiles/MetroMondego.dir/build
 .PHONY : MetroMondego/fast
 
-files.obj: files.c.obj
-.PHONY : files.obj
+fileHandling.obj: fileHandling.c.obj
+.PHONY : fileHandling.obj
 
 # target to build an object file
-files.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MetroMondego.dir\build.make CMakeFiles/MetroMondego.dir/files.c.obj
-.PHONY : files.c.obj
+fileHandling.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MetroMondego.dir\build.make CMakeFiles/MetroMondego.dir/fileHandling.c.obj
+.PHONY : fileHandling.c.obj
 
-files.i: files.c.i
-.PHONY : files.i
+fileHandling.i: fileHandling.c.i
+.PHONY : fileHandling.i
 
 # target to preprocess a source file
-files.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MetroMondego.dir\build.make CMakeFiles/MetroMondego.dir/files.c.i
-.PHONY : files.c.i
+fileHandling.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MetroMondego.dir\build.make CMakeFiles/MetroMondego.dir/fileHandling.c.i
+.PHONY : fileHandling.c.i
 
-files.s: files.c.s
-.PHONY : files.s
+fileHandling.s: fileHandling.c.s
+.PHONY : fileHandling.s
 
 # target to generate assembly for a file
-files.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MetroMondego.dir\build.make CMakeFiles/MetroMondego.dir/files.c.s
-.PHONY : files.c.s
+fileHandling.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MetroMondego.dir\build.make CMakeFiles/MetroMondego.dir/fileHandling.c.s
+.PHONY : fileHandling.c.s
 
 linhas.obj: linhas.c.obj
 .PHONY : linhas.obj
@@ -281,9 +281,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... MetroMondego
-	@echo ... files.obj
-	@echo ... files.i
-	@echo ... files.s
+	@echo ... fileHandling.obj
+	@echo ... fileHandling.i
+	@echo ... fileHandling.s
 	@echo ... linhas.obj
 	@echo ... linhas.i
 	@echo ... linhas.s

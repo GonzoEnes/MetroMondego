@@ -1,6 +1,8 @@
-CMakeFiles/MetroMondego.dir/main.c.obj: \
- C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\main.c \
- C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/time.h \
+CMakeFiles/MetroMondego.dir/fileHandling.c.obj: \
+ C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\fileHandling.c \
+ C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\fileHandling.h \
+ C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\paragens.h \
+ C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/stdio.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/_mingw.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
@@ -8,12 +10,6 @@ CMakeFiles/MetroMondego.dir/main.c.obj: \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/vadefs.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_directx.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/_timeval.h \
- C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/sys/timeb.h \
- C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
- C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/pthread_time.h \
- C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\paragens.h \
- C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/stdio.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/_mingw_print_push.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/_mingw_off_t.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
@@ -27,6 +23,4 @@ CMakeFiles/MetroMondego.dir/main.c.obj: \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/malloc.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/string.h \
  C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
- C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\menu.h \
- C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\linhas.h \
- C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\fileHandling.h
+ C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\linhas.h

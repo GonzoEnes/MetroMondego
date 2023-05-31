@@ -110,19 +110,19 @@ CMakeFiles/MetroMondego.dir/linhas.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/MetroMondego.dir/linhas.c.s"
 	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\linhas.c -o CMakeFiles\MetroMondego.dir\linhas.c.s
 
-CMakeFiles/MetroMondego.dir/files.c.obj: CMakeFiles/MetroMondego.dir/flags.make
-CMakeFiles/MetroMondego.dir/files.c.obj: ../files.c
-CMakeFiles/MetroMondego.dir/files.c.obj: CMakeFiles/MetroMondego.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/MetroMondego.dir/files.c.obj"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/MetroMondego.dir/files.c.obj -MF CMakeFiles\MetroMondego.dir\files.c.obj.d -o CMakeFiles\MetroMondego.dir\files.c.obj -c C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\files.c
+CMakeFiles/MetroMondego.dir/fileHandling.c.obj: CMakeFiles/MetroMondego.dir/flags.make
+CMakeFiles/MetroMondego.dir/fileHandling.c.obj: ../fileHandling.c
+CMakeFiles/MetroMondego.dir/fileHandling.c.obj: CMakeFiles/MetroMondego.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/MetroMondego.dir/fileHandling.c.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/MetroMondego.dir/fileHandling.c.obj -MF CMakeFiles\MetroMondego.dir\fileHandling.c.obj.d -o CMakeFiles\MetroMondego.dir\fileHandling.c.obj -c C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\fileHandling.c
 
-CMakeFiles/MetroMondego.dir/files.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/MetroMondego.dir/files.c.i"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\files.c > CMakeFiles\MetroMondego.dir\files.c.i
+CMakeFiles/MetroMondego.dir/fileHandling.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/MetroMondego.dir/fileHandling.c.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\fileHandling.c > CMakeFiles\MetroMondego.dir\fileHandling.c.i
 
-CMakeFiles/MetroMondego.dir/files.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/MetroMondego.dir/files.c.s"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\files.c -o CMakeFiles\MetroMondego.dir\files.c.s
+CMakeFiles/MetroMondego.dir/fileHandling.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/MetroMondego.dir/fileHandling.c.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Gonsalo\Documents\GitHub\MetroMondego_TP_P\fileHandling.c -o CMakeFiles\MetroMondego.dir\fileHandling.c.s
 
 CMakeFiles/MetroMondego.dir/menu.c.obj: CMakeFiles/MetroMondego.dir/flags.make
 CMakeFiles/MetroMondego.dir/menu.c.obj: ../menu.c
@@ -157,7 +157,7 @@ MetroMondego_OBJECTS = \
 "CMakeFiles/MetroMondego.dir/main.c.obj" \
 "CMakeFiles/MetroMondego.dir/paragens.c.obj" \
 "CMakeFiles/MetroMondego.dir/linhas.c.obj" \
-"CMakeFiles/MetroMondego.dir/files.c.obj" \
+"CMakeFiles/MetroMondego.dir/fileHandling.c.obj" \
 "CMakeFiles/MetroMondego.dir/menu.c.obj" \
 "CMakeFiles/MetroMondego.dir/utils.c.obj"
 
@@ -167,7 +167,7 @@ MetroMondego_EXTERNAL_OBJECTS =
 MetroMondego.exe: CMakeFiles/MetroMondego.dir/main.c.obj
 MetroMondego.exe: CMakeFiles/MetroMondego.dir/paragens.c.obj
 MetroMondego.exe: CMakeFiles/MetroMondego.dir/linhas.c.obj
-MetroMondego.exe: CMakeFiles/MetroMondego.dir/files.c.obj
+MetroMondego.exe: CMakeFiles/MetroMondego.dir/fileHandling.c.obj
 MetroMondego.exe: CMakeFiles/MetroMondego.dir/menu.c.obj
 MetroMondego.exe: CMakeFiles/MetroMondego.dir/utils.c.obj
 MetroMondego.exe: CMakeFiles/MetroMondego.dir/build.make

@@ -74,10 +74,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/Gonsalo/Documents/GitHub/MetroMondego_TP_P/files.c">
+		<Unit filename="C:/Users/Gonsalo/Documents/GitHub/MetroMondego_TP_P/fileHandling.c">
 			<Option target="MetroMondego"/>
 		</Unit>
-		<Unit filename="C:/Users/Gonsalo/Documents/GitHub/MetroMondego_TP_P/files.h">
+		<Unit filename="C:/Users/Gonsalo/Documents/GitHub/MetroMondego_TP_P/fileHandling.h">
 			<Option target="MetroMondego"/>
 		</Unit>
 		<Unit filename="C:/Users/Gonsalo/Documents/GitHub/MetroMondego_TP_P/linhas.c">

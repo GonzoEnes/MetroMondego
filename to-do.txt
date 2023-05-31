@@ -13,7 +13,7 @@ LINHAS:
 Criação de lista ligada - SIM
 Adicionar linhas ao sistema com user input - SIM
 Adicionar paragens a uma certa linha - SIM
-Adicionar linhas ao sistema com ficheiro de texto - NAO
+Adicionar linhas ao sistema com ficheiro de texto - SIM
 Verificação se existem 2 linhas com o mesmo nome - SIM
 Atualizar linhas (apagar ou adicionar paragens) com quantidade = userInput - SIM
 Visualizar todos os detalhes da linha (paragens, numero de paragens e assim) - SIM
@@ -31,13 +31,13 @@ Criação de uma UI com menu e assim - SIM
 
 O QUE FALTA:
 
-Criar paragem com o ficheiro de texto e armazenar detalhes - NAO
+Criar paragem com o ficheiro de texto e armazenar detalhes - SIM
 Adicionar linhas ao sistema com ficheiro de texto - SIM
 Calcular percursos com destino e partida indicados pelo user - NAO
       Com 1 mudança de linha -   NAO
       Com apenas a mesma linha - NAO/SIM
 Criação de uma UI com menu e assim - SIM
-Arranjar o bug visual com o nLinhas quando se criam mais que uma linha (o problema está quando crias 2 linhas (ou mais) e o nLinhas da primeira linha não atualiza) - NAO
-Quando uma paragem é removida do sistema, a(s) linha(s) que a tinham, já não a podem ter mais - NAO (no removerParagem do sistema, aceita um pLinha e percorre depois de ter sido removido para a tirar de lá) - NAO
-seg fault quando tentas por uma paragem igual que já existe no sistema após a criação de uma linha - NAO
-Quando voltas a adicionar uma paragem que já removeste a uma linha, essa paragem não te deixa voltar a por - NAO
+Arranjar o bug visual com o nLinhas quando se criam mais que uma linha (o problema está quando crias 2 linhas (ou mais) e o nLinhas da primeira linha não atualiza) - SIM
+Quando uma paragem é removida do sistema, a(s) linha(s) que a tinham, já não a podem ter mais (no removerParagem do sistema, aceita um pLinha e percorre depois de ter sido removido para a tirar de lá) - SIM
+seg fault quando tentas por uma paragem igual que já existe no sistema após a criação de uma linha - SIM
+Quando voltas a adicionar uma paragem que já removeste a uma linha, essa paragem não te deixa voltar a por - SIM
