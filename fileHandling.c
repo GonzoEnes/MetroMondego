@@ -68,7 +68,7 @@ int getNumOfStructsInFile(char* fileName) {
     }
 
     fclose(f);
-    
+
     return total;
 }
 
@@ -79,7 +79,7 @@ pParagem readParagensFromFile(char* fileName, int *total) {
     *total = getNumOfStructsInFile(fileName);
 
     if (*total == 0) {
-        printf("[ERRO] Ficheiro nao tem structs.\n");
+        printf("\n[ERRO] Ficheiro nao tem structs.\n");
         fclose(f);
         return NULL;
     }
@@ -131,31 +131,37 @@ pLinha createLinhaFromTxtFile(char* fileName, pLinha head, pParagem p, int tam) 
     char auxParagem[MAX];
 
     if (f == NULL) {
-       printf("\n[ERRO] Nao encontrei ficheiro de texto! [%s]", fileName);
-       return NULL;
+        printf("\n[ERRO] Nao encontrei ficheiro de texto! [%s]", fileName);
+        return head;
     }
 
     if (fgets(firstLine, sizeof(firstLine), f) != NULL) {
+
+        if (doesLinhaExist(head, firstLine) == 1) {
+            printf("\n[ERRO] Linha [%s] ja existe no sistema!\n", firstLine);
+            fclose(f);
+            return head;
+        }
 
         novaLinha = malloc(sizeof(struct linhas));
 
         if (novaLinha == NULL) {
             printf("\n[ERRO] Falha na alocacao de espaco para nova linha!\n");
             fclose(f);
-            return NULL;
+            return head;
         }
 
         firstLine[strcspn(firstLine, "\n")] = 0; // remove o \n da string
 
         strcpy(novaLinha->nomeLinha, firstLine);
 
-        novaLinha->nParagens = countNumberOfLinesInFileExceptFirst(fileName);
+        novaLinha->nParagens = countNumberOfLinesInFileExceptFirst(fileName); // as linhas do ficheiro de texto, excluindo a primeira, vao dar nos o numero completo de paragens que existem no ficheiro
 
         if (novaLinha->nParagens == 0) {
             printf("\n[ERRO] Nao e possivel criar a linha sem, pelo menos, uma paragem.\n");
-            free(head);
+            free(novaLinha);
             fclose(f);
-            return NULL;
+            return head;
         }
 
         novaLinha->paragens = malloc(novaLinha->nParagens * sizeof(struct paragens));
@@ -168,6 +174,7 @@ pLinha createLinhaFromTxtFile(char* fileName, pLinha head, pParagem p, int tam) 
         }
 
         for (int i = 0; i < novaLinha->nParagens; i++){
+
             if (fgets(auxParagem, sizeof(auxParagem), f) != NULL) {
 
                 auxParagem[strcspn(auxParagem, "\n")] = 0;
