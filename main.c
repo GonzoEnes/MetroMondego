@@ -11,7 +11,7 @@ int main() {
 
     char codigo[5];
 
-    int choice, choiceOfUpdate, nLinhas = 0;
+    int choice, choiceOfUpdate;
 
     char pontoPartida[MAX], pontoChegada[MAX], updater[MAX], nomeFich[MAX];
 
@@ -134,6 +134,9 @@ int main() {
                 printf("\nInsira o nome do ficheiro de texto (com .txt apos o nome):  ");
                 scanf(" %s", nomeFich);
                 linhas = createLinhaFromTxtFile(nomeFich, linhas, p, tam);
+                break;
+            case 10:
+                listaInfoLinha(linhas, p, tam);
                 break;
             case 0:
                 printf("A terminar execucao...\n");

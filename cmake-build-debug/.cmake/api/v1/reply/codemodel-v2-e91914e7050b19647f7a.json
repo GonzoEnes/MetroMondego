@@ -39,11 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "MetroMondego::@6890427a1f51a3e7e1df",
-<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-0da95396e7e9d4d5fa94.json
-					"jsonFile" : "target-MetroMondego-Debug-0eadad74f4a834b58bea.json",
-========
 					"jsonFile" : "target-MetroMondego-Debug-4a17c4408fc31e84537f.json",
->>>>>>>> 7f8693cfe9ae2557890f12bd910b2e6995c23d7c:cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-e91914e7050b19647f7a.json
 					"name" : "MetroMondego",
 					"projectIndex" : 0
 				}
@@ -53,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Utilizador/Documents/GitHub/MetroMondego_TP_P/cmake-build-debug",
-		"source" : "C:/Users/Utilizador/Documents/GitHub/MetroMondego_TP_P"
+		"build" : "C:/Users/Gonsalo/Documents/GitHub/MetroMondego_TP_P/cmake-build-debug",
+		"source" : "C:/Users/Gonsalo/Documents/GitHub/MetroMondego_TP_P"
 	},
 	"version" : 
 	{

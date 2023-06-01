@@ -3,7 +3,7 @@
 //
 #include "menu.h"
 
-int menu(){
+int menu() {
     int opcao;
 
     printf("\nEscolha a opcao: \n");
@@ -17,16 +17,17 @@ int menu(){
     printf("7 - Calcule um percurso entre dois pontos\n");
     printf("8 - Atualizar informacao de uma linha\n");
     printf("9 - Criar uma linha de um ficheiro de texto\n");
+    printf("10 - Listar informacao de uma linha dada uma paragem\n");
     printf("\n0 - Terminar execucao");
 
     do{
         printf("\n\nOpcao pretendida: ");
         scanf("%d", &opcao);
 
-        if (opcao < 0 || opcao > 9)
+        if (opcao < 0 || opcao > 10)
             printf("\nInput invalido!");
 
-    }while(opcao < 0 || opcao > 9);
+    }while(opcao < 0 || opcao > 10);
 
     printf("\n");
 

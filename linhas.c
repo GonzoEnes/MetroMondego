@@ -513,9 +513,7 @@ void listaAllLinhaInfo(pLinha head){
 }
 
 void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melhor esta função para não ficar tão grande quando tiver tempo
-    char userChoice[MAX], nomeParagem[MAX];
-
-    int index; //, numLinhas = 0, flag = 0;
+    char userChoice[MAX], codigoParagem[MAX];
 
     if (isListEmpty(head) == 1){
         printf("[WARNING] Nada a listar. Nao existem linhas no sistema. Experimente cria-las!");
@@ -540,39 +538,38 @@ void listaInfoLinha(pLinha head, pParagem p, int totalParagens){ //dividir melho
 
     else if (strcmp(userChoice, "paragem") == 0){
         do{
-            printf("\nInsira o nome da paragem a procurar: ");
+            printf("\nInsira o codigo da paragem a procurar ('fim' para terminar): ");
 
             fflush(stdin);
 
-            fgets(nomeParagem, sizeof(nomeParagem), stdin);
+            fgets(codigoParagem, sizeof(codigoParagem), stdin);
 
-            nomeParagem[strcspn(nomeParagem, "\n")] = 0;
+            codigoParagem[strcspn(codigoParagem, "\n")] = 0;
 
-            listaInfoLinhaByParagem(head, p, totalParagens, nomeParagem);
+            listaInfoLinhaByParagem(head, p, totalParagens, codigoParagem);
             //printf("\nTotal: [%d] linhas passam por [%s]\n", numLinhas, nomeParagem); ARRANJAR MANEIRA DE PRINTAR ISTO
-            if (strcmp(nomeParagem, "fim") == 0){
+            if (strcmp(codigoParagem, "fim") == 0){
                 printf("A interromper a listagem...\n");
             }
-        }while(strcmp(nomeParagem, "fim") != 0);
+        }while(strcmp(codigoParagem, "fim") != 0);
     }
 }
 
-void listaInfoLinhaByParagem(pLinha head, pParagem p, int totalParagens, char nomeParagem[MAX]){
+void listaInfoLinhaByParagem(pLinha head, pParagem p, int totalParagens, char* codigoParagem){
     pLinha aux;
 
-    if(contemParagem(head, nomeParagem) == -1){
-        printf("\n[ERRO] Linha nao contem paragens!\n");
+    if(contemParagem(head, codigoParagem) == -1){
         return;
     }
 
-    int index = checkIfExistsByName(p, nomeParagem, totalParagens); // verifica se essa paragem existe no sistema
+    int index = checkIfExistsByCode(p, codigoParagem, totalParagens); // verifica se essa paragem existe no sistema
 
     if (index != -1){ // existe no sistema
-        printf("\nParagem registada, a mostrar linhas que passam em [%s]...\n", nomeParagem);
+        printf("\nParagem registada, a mostrar linhas que passam em [%s]...\n", codigoParagem);
         aux = head;
         while(aux != NULL){
             for (int i = 0; i < aux->nParagens; i++){
-                if(strcmp(nomeParagem, aux->paragens[i].nome) == 0) {
+                if(strcmp(codigoParagem, aux->paragens[i].codigo) == 0) {
                     printf("\nNome linha: [%s]\n", aux->nomeLinha);
                     printf("Numero de paragens: [%d]\n", aux->nParagens);
                 }

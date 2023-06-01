@@ -21,8 +21,8 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens);
 pLinha removeLinha(pLinha head, pParagem p, int tam);
 pLinha removeParagemFromLinha(pLinha head, pParagem p, int tam, char* nomeLinha); // remove X paragens de linha Y
 int isListEmpty(pLinha linhas);
-void listaInfoLinha(pLinha head, pParagem p, int totalLinhas);
-void listaInfoLinhaByParagem(pLinha head, pParagem p, int totalLinhas, char nomeParagem[MAX]);
+void listaInfoLinha(pLinha head, pParagem p, int totalParagens);
+void listaInfoLinhaByParagem(pLinha head, pParagem p, int totalLinhas, char* codigo);
 int contemParagem(pLinha head, char* codigoParagem); // verifica se contem uma determinada paragem passada por parametro na lista de linhas
 int doesLinhaExist(pLinha head, char* nomeLinha);
 void calculaParagensSemOverflow(pLinha head, char* nomePartida, char* nomeDestino);
