@@ -17,8 +17,6 @@ pParagem addParagem(pParagem p, int *tam){
 
     novo.nome[strcspn(novo.nome, "\n")] = 0;
 
-    //novo.nome[strcspn(novo.nome, "\n")] = 0;
-
     int index = checkIfExistsByName(p, novo.nome, *tam);
 
     if (index != -1) {
@@ -71,7 +69,7 @@ pParagem removeParagem(pParagem p, char* codigo, int *tam){
         return p;
     }
 
-    if (*tam == 0) { // if array contains only one element, free() the list.
+    if (*tam == 0) {
         free(p);
         return NULL;
     }
@@ -106,32 +104,6 @@ int checkIfExistsByName(pParagem p, char* nome, int tam){
     }
     return -1;
 }
-
-/*void listaParagemByLinha(pParagem p, int tam, char* nomeLinha){
-    if (tam == 0){
-        printf("[WARNING] Nada a listar.");
-        return;
-    }
-
-    printf("\n------------ A LISTAR PARAGENS DE LINHA [%s] ------------\n", nomeLinha);
-
-    for (int i = 0; i < tam; i++){
-
-        if(strcmp() == 0){
-            printf("\nParagem %d: \n", i+1);
-
-            printf("Nome: %s\n", p[i].nome);
-
-            printf("Codigo: %s\n", p[i].codigo);
-
-            printf("\nPertence a: %d linhas\n", p[i].nLinhas);
-        }
-
-    }
-
-    printf("\n------------  FIM DA LISTAGEM  ------------\n");
-
-}*/
 
 void listaParagemSys(pParagem p, int tam){
     if(tam == 0){
