@@ -89,7 +89,7 @@ void calculaParagensSemOverflow(pLinha head, char* nomePartida, char* nomeDestin
                             }
                             printf(" [%s] \n", nomeDestino);
                         }
-                        // Encerra a função após imprimir os elementos
+                        
                     }
                 }
             }
@@ -368,11 +368,6 @@ pLinha addParagensToLinhaRefresh(pParagem p, pLinha head, char* nomeLinha, int t
         printf("\n[ERRO] Nao existem linhas no sistema atualmente. Nada a adicionar.\n");
         return head;
     }
-
-    /*if (quant > totalParagens) {
-        printf("\n[ERRO] Nao pode adicionar mais paragens a linha do que ja existem.\n");
-        return head;
-    }*/
 
     while(aux != NULL){
         if (strcmp(aux->nomeLinha, nomeLinha) == 0){
