@@ -96,60 +96,6 @@ void calculaParagensSemOverflow(pLinha head, char* nomePartida, char* nomeDestin
         }
         aux = aux->prox;
     }
-
-    /*while(aux != NULL){
-        for (int i = 0; i < aux->nParagens; i++){
-            if (strcmp(aux->paragens[i].nome, nomePartida) == 0){
-                indexStartPoint = i;
-                // printf("\nIndex start: %d\n", indexStartPoint);
-                for(int j = i; j < aux->nParagens + indexStartPoint; j++){
-                    int indexSave = j % aux->nParagens;
-                    if(strcmp(aux->paragens[indexSave].nome, nomeDestino) == 0){
-                        indexEndPoint = indexSave; // para nao se perder o endPoint
-                        //printf("\nIndex end: %d\n", indexEndPoint);
-                        if(indexStartPoint < indexEndPoint){ // se correr tudo normalmente e o inicio estiver antes do fim, então:
-                            printf("\n------------------------------------------------------------------------------\n");
-                            printf("\n[NOTIFICACAO] Este percurso pode ser feito pela linha: [%s]", aux->nomeLinha);
-                            printf("\nA listar todo o percurso que fara entre [%s] -> [%s]", nomePartida, nomeDestino);
-
-                            printf("\n[%s]", nomePartida);
-
-                            while (indexStartPoint < indexEndPoint){
-                                //indexStartPoint++;
-                                printf(" -> [%s]", aux->paragens[++indexStartPoint].nome);
-                            }
-                            printf("\n\n------------------------------------------------------------------------------\n");
-                            break;
-                        }
-                        else if(indexStartPoint > indexEndPoint){ // se o inicio estiver depois do fim
-                            printf("\n------------------------------------------------------------------------------\n");
-                            printf("\n[NOTIFICACAO] Este percurso pode ser feito pela linha: [%s]\n", aux->nomeLinha);
-                            printf("\nA listar todo o percurso que fara entre [%s] -> [%s]\n\n", nomePartida, nomeDestino);
-
-                            // print stops from starting point to end of array
-                            for(int k = indexStartPoint; k < aux->nParagens; k++){
-                                printf("-> [%s] ", aux->paragens[k].nome);
-                            }
-
-                            // print stops from beginning of array to ending point
-                            for(int l = 0; l <= indexEndPoint; l++){
-                                printf("-> [%s] ", aux->paragens[l].nome);
-                            }
-
-                            // print ending stop
-                            printf("\n------------------------------------------------------------------------------\n");
-                            break;
-                        }
-                    }
-                    else{
-                        //printf("\nOla\n");
-                        continue;
-                    }
-                }
-            }
-        }
-        aux = aux->prox;
-    }*/
 }
 
 void decrementaFromSystem(pParagem p, pLinha head, int totalParagens){
@@ -187,6 +133,7 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
     novo->prox = NULL;
 
     if (doesLinhaExist(head, novo->nomeLinha) == 1) { // linha já existe
+        printf("\n[ERRO] Nao pode criar uma linha com nome igual a outra que ja existe.\n");
         free(novo);
         return head;
     }
@@ -200,7 +147,7 @@ pLinha criaLinha(pLinha head, pParagem p, int totalParagens){
 
     scanf(" %d", &cont);
 
-    if(cont <= totalParagens){
+    if(cont <= totalParagens && cont > 0){
 
         novo->nParagens = cont;
 
@@ -485,6 +432,12 @@ pLinha removeLinha(pLinha head, pParagem p, int tam){
 
 void listaAllLinhaInfo(pLinha head){
     pLinha aux = head;
+
+    if (head == NULL) {
+        printf("\n[AVISO] Nao existem linhas no sistema atualmente. Experimente criá-las!\n");
+        return;
+    }
+
     printf("\nA LISTAR INFO DE TODAS AS LINHAS\n");
     while(aux != NULL){
         if(aux->nParagens > 0) {

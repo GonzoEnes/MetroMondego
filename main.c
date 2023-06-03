@@ -35,9 +35,11 @@ int main() {
     }
     if (linhas == NULL) {
         printf("\nFicheiro estava vazio.\nNao acrescentei novas linhas.\n");
-        printf("\n[NOTIFICACAO] Paragens foram lidas com sucesso mas nao tem linha(s) associada(s). A atualizar as paragens do sistema para o refletir...\n");
-        for (int i = 0; i < tam; i++) {
-            p[i].nLinhas = 0;
+        if (p != NULL){
+            printf("\n[NOTIFICACAO] Paragens foram lidas com sucesso mas nao tem linha(s) associada(s). A atualizar as paragens do sistema para o refletir...\n");
+            for (int i = 0; i < tam; i++) {
+                p[i].nLinhas = 0;
+            }
         }
     }
     else {
